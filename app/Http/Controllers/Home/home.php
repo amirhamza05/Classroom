@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+//custom controllers
+use App\Http\Controllers\Notification\NotificationController as Notification;
+use App\Http\Controllers\Notification\Template\NotificationTemplateController as NotificationTemplate;
+
 use Validator;
 
 
@@ -33,7 +37,7 @@ class home extends Controller
     public function home(){
         if (Auth::check()) {
             
-            $userType = auth()->user()->user_type;
+            $userType = auth()->user()->user_type; 
 
             echo "You are log in";
             if($userType == "Student")
@@ -44,6 +48,47 @@ class home extends Controller
         return view('home');
     }
     public function test(){
+
+        //$Notification = new NotificationController(); 
+        //$response = Notification::send('sms',[
+        //    'to' => "01777564786",
+        //    'body' => 'Hello Laravel'
+        //]);
+       // File::put(public_path() . '/static/index.html', View::make('home.mail'));
+       // file_put_contents('home.mail', "dfg");
+
+        // $data = NotificationTemplate::customSet(['from_name'=>"hey",'subject'=>'','sms_body'=>'dear [[nick]], welcome to our system\n\n[[app_name]]','mail_body' => ''],[
+        //     [
+        //         'nick'=>'hamza'
+        //     ],
+        //     [   
+        //         'nick' => "Rahim"
+        //     ]
+        // ]
+        // );
+        echo "<pre>";
+       // print_r($data);
+        echo "</pre>";
+
+     // echo "<textarea>$html</textarea>";
+
+        //$data = NotificationTemplate::reset();
+        //echo "<pre>";
+        //print_r($data);
+        //echo "</pre>";
+
+
+        return;
+
+        $response = Notification::send('email',[
+            'to' => "sk.amirhamza@gmail.com",
+            'subject' => "Ok. This is Ok",
+            'body' => 'Your class room is ok'
+        ]);
+
+        print_r($response);
+
+        return;
         $userData = $user = DB::table('users')->where('nick_name', 'hamza')->first();
         $user = auth()->user();
         print_r($user);
@@ -66,6 +111,4 @@ class home extends Controller
         }
         return "Request Not Found";
     }
-
-    
 }

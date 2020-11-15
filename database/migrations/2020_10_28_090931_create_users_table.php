@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('user_id');
+            $table->bigIncrements('id');
             $table->string('login_id')->unique();
             $table->enum('user_type', ['Admin', 'Student','Teacher']);
             $table->string('full_name',100);
@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->boolean('phone_verified')->default(0);
             $table->boolean('email_verified')->default(0);
-            $table->timestamp('join_time', 0);
+            $table->timestamps();
         });
     }
 

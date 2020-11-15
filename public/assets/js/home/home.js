@@ -1,3 +1,16 @@
+function btnOff(btnId,txt){
+  txt = !txt?"":txt;
+    $("#"+btnId).attr("disabled", true);
+    $("#"+btnId).html("<i class='fa fa-refresh fa-spin fa-1x fa-fw'></i> "+txt);
+}
+
+function btnOn(btnId,txt){
+  txt = !txt?"":txt;
+    $("#"+btnId).removeAttr("disabled");
+    if(txt!="")
+        $("#"+btnId).html(txt);
+}
+
 function loadLoginArea(action) {
     var data = {
         'page': action,
@@ -17,7 +30,7 @@ function login() {
     $.post("/login", data, function(response) {
         if(response.error == 0) location.reload();
         else{
-            $("#loginResponse").html(response.error);
+            $("#loginResponse").html(response.errorMsg);
             console.log(response);
         }
     });
@@ -33,6 +46,7 @@ function registration() {
         '_token': _token
     };
     $("#errorArea").hide();
+    btnOff("registrationBtn","Processing...");
     $.post("/registration", data, function(response) {
         console.log(response);
         if(response.error != 1) {
@@ -45,5 +59,6 @@ function registration() {
                  $("#errorArea").append(""+msg+"<br/>");
              });
         }
+        btnOn("registrationBtn","Register New Account");
     });
 }

@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-//custom added
-use Illuminate\Support\Facades\Auth;
-use Validator;
-use DB;
 use App\User;
 
+//custom added
+use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Validator;
+
+//custom controllers
+use App\Http\Controllers\Notification\NotificationController as Notification;
 
 class LoginController extends Controller
 {
@@ -46,12 +48,13 @@ class LoginController extends Controller
         ]);
     }
 
-    public function getRandomString($len = 6){
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+    public function getRandomString($len = 6)
+    {
+        $characters   = '0123456789abcdefghijklmnopqrstuvwxyz';
         $randomString = "";
-        for ($i = 0; $i < $len; $i++) { 
-            $index = rand(0, strlen($characters) - 1); 
-            $randomString .= $characters[$index]; 
+        for ($i = 0; $i < $len; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
         }
         return $randomString;
     }
@@ -65,7 +68,7 @@ class LoginController extends Controller
             'nick_name' => 'required',
             'user_type' => 'required',
             'email'     => 'required|email',
-            'phone'    => 'required|regex:/(01)[0-9]{9}/',
+            'phone'     => 'required|regex:/^((01)[0-9\s\-\+\(\)]*)$/|min:10',
         ]);
 
         if (!$validator->passes()) {
@@ -82,22 +85,38 @@ class LoginController extends Controller
         $data['login_id'] = $this->getRandomString(10);
         $data['password'] = bcrypt($password);
 
-        $createUserId = User::create($data)->user_id;
+        $createUserId = User::create($data)->id;
 
-       	$loginIdPrefix = substr($reqData['user_type'], 0, 1);
-       	$loginId = $loginIdPrefix."-".$createUserId;
+        $loginIdPrefix = substr($reqData['user_type'], 0, 1);
+        $loginId       = $loginIdPrefix . "-" . $createUserId;
 
         DB::table('users')
-            ->where('user_id', $createUserId)
+            ->where('id', $createUserId)
             ->update(['login_id' => $loginId]);
 
-        return view('home/registration_success',['loginId'=>$loginId,'password'=>$password]);
-        
+        $nickName = $data['nick_name'];
+
+        $response = Notification::send('mail',[
+            'to' => $data['email'],
+            'subject' => "Account Information",
+            'body' => "Dear $nickName,<br/>Congratulations for registration our classroom.<br/><br/>Login Id: $loginId<br/>Password: $password<br/><br/>(Classroom)
+            "
+        ]);
+
+        $response = Notification::send('sms',[
+            'to' => $data['phone'],
+            'subject' => "Account Information",
+            'body' => "Dear $nickName,\nCongratulations for registration our classroom.\n\nLogin Id: $loginId\nPassword: $password\n\n(Classroom)
+            "
+        ]);
+
+        return view('home/registration_success', ['loginId' => $loginId, 'password' => $password]);
+
         return response()->json([
             'error'    => 0,
             'errorMsg' => view('home/registration_success'),
-            'loginId' => $loginId,
-            'password' => $password
+            'loginId'  => $loginId,
+            'password' => $password,
         ]);
 
     }

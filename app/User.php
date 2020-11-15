@@ -9,17 +9,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $table      = "users";
-    protected $primaryKey = 'user_id';
-    public $timestamps    = false;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'login_id', 'user_type', 'full_name', 'nick_name', 'email', 'phone', 'password', 'phone_verified', 'email_verified', 'join_time',
+        'login_id', 'user_type', 'full_name', 'nick_name', 'email', 'phone', 'password', 'phone_verified', 'email_verified'
     ];
 
     /**
@@ -28,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 
     /**

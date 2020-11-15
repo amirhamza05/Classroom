@@ -26,7 +26,7 @@
 	<div class="col-md-8" style="text-align: center;">
 		<div class="homeLeft text-center">
 			<div class="homeTextArea">
-				<span class="doubleTxtRed welcomeTxt">Welcome</span>
+				<span class="doubleTxtRed welcomeTxt">EduHome</span>
 				<div class="homeTitleArea">
 					<span class="doubleTxtBlue titleTxt">Virtual </span>
 					<span class="doubleTxtBlue titleTxt">Class </span>
@@ -48,3 +48,5 @@
 	</div>
 </body>
 </html>
+
+{{isset($variable) ? $variable : ''}}
