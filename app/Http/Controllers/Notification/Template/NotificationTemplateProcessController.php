@@ -26,27 +26,31 @@ class NotificationTemplateProcessController extends Controller
             'app_name' => config('app.name'),
         ];
     }
+    
     public function set($templateName = '', $variableData = [])
     {
-    	$this->templateData = $this->getTemplateData($templateName);
+        $this->templateData = $this->getTemplateData($templateName);
         $this->variableData = $variableData;
         return $this->processTemplate();
     }
-    public function customSet($templateData,$variableData = []){
-    	foreach ($this->selectOption as $key => $value) {
-    		if(!isset($templateData[$value])){
-    			return [
-    				'error' => "can not found $value field"
-    			];
-    		}
-    	}
-    	$this->templateData = $templateData;
-    	$this->variableData = $variableData;
-    	return $this->processTemplate();
+
+    public function customSet($templateData, $variableData = [])
+    {
+        foreach ($this->selectOption as $key => $value) {
+            if (!isset($templateData[$value])) {
+                return [
+                    'error' => "can not found $value field",
+                ];
+            }
+        }
+        $this->templateData = $templateData;
+        $this->variableData = $variableData;
+        return $this->processTemplate();
     }
 
-    public function processTemplate(){
-    	if (!isset($this->templateData)) {
+    public function processTemplate()
+    {
+        if (!isset($this->templateData)) {
             return [
                 'error' => "template name is not valid",
             ];

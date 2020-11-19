@@ -28,7 +28,7 @@
 <input type="email" name="email" id="email" placeholder="Enter Email">
 <div class="loginInputLabel">Phone</div>
 <input type="number" name="phone" id="phone" placeholder="Enter Mobile Number">
-<!-- <input type="submit" name=""> -->
+<!-- <input type="submit" name="">  -->
 </form>
 <button id="registrationBtn" class="loginBtn btnBlue" onclick="registration()">Register New Account</button>
 <center>Already have account? <a href="javascript:loadLoginArea('login');"><u><b>Login Here</b></u></a></center>

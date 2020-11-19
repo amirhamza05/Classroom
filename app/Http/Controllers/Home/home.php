@@ -56,19 +56,30 @@ class home extends Controller
         //]);
        // File::put(public_path() . '/static/index.html', View::make('home.mail'));
        // file_put_contents('home.mail', "dfg");
+        // $id = 1000;
+        // echo base_convert($id, 10, 33), "\n";
+        //  $data = NotificationTemplate::customSet(['from_name'=>"hey",'subject'=>'','sms_body'=>'dear [[nick]], welcome to our system\n\n[[app_name]]','mail_body' => ''],[
+        //      [
+        //          'nick'=>'hamza'
+        //      ],
+        //      [   
+        //          'nick' => "Rahim"
+        //      ]
+        //  ]
+        //  );
 
-        // $data = NotificationTemplate::customSet(['from_name'=>"hey",'subject'=>'','sms_body'=>'dear [[nick]], welcome to our system\n\n[[app_name]]','mail_body' => ''],[
-        //     [
-        //         'nick'=>'hamza'
-        //     ],
-        //     [   
-        //         'nick' => "Rahim"
-        //     ]
-        // ]
-        // );
-        echo "<pre>";
-       // print_r($data);
-        echo "</pre>";
+        // $data = NotificationTemplate::set('welcome',[
+        //      [
+        //          'nick'=>'Alice'
+        //      ],
+        //      [   
+        //          'nick' => "Bob"
+        //      ]
+        //  ]
+        //  );
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
 
      // echo "<textarea>$html</textarea>";
 

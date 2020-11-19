@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 #guest user login option
 Route::get('/', "Home\home@home");
-
-
+Route::get('/admin/dashboard', "Home\home@home");
 Route::post('/home', 'Home\home@loadPage');
+
+
+//Route::post('/home', 'Home\home@loadPage');
 
 
 Route::post('/login', 'Auth\LoginController@login');
@@ -25,6 +27,15 @@ Route::post('/registration', 'Auth\LoginController@registration');
 Route::get('/registration', function(){
 	return view("home/registration");
 });
+
+Route::group(['middleware' => ['admin']], function () {
+    Route::get('/admin1', function () {
+        echo "admin dashboard ";
+    });
+});
+
+
+
 
 Route::get('/test', "Home\home@test");
 Route::get('/logout', 'Auth\LoginController@logout');

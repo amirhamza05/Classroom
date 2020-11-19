@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Http\Controllers\Notification\NotificationController as Notification;
 
 //custom added
+use App\User;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Validator;
 
 //custom controllers
-use App\Http\Controllers\Notification\NotificationController as Notification;
+use Validator;
 
 class LoginController extends Controller
 {
@@ -96,19 +96,19 @@ class LoginController extends Controller
 
         $nickName = $data['nick_name'];
 
-        $response = Notification::send('mail',[
-            'to' => $data['email'],
+        $response = Notification::send('mail', [
+            'to'      => $data['email'],
             'subject' => "Account Information",
-            'body' => "Dear $nickName,<br/>Congratulations for registration our classroom.<br/><br/>Login Id: $loginId<br/>Password: $password<br/><br/>(Classroom)
-            "
+            'body'    => "Dear $nickName,<br/>Congratulations for registration our classroom.<br/><br/>Login Id: $loginId<br/>Password: $password<br/><br/>(Classroom)
+            ",
         ]);
 
-        $response = Notification::send('sms',[
-            'to' => $data['phone'],
-            'subject' => "Account Information",
-            'body' => "Dear $nickName,\nCongratulations for registration our classroom.\n\nLogin Id: $loginId\nPassword: $password\n\n(Classroom)
-            "
-        ]);
+        /*$response = Notification::send('sms',[
+        'to' => $data['phone'],
+        'subject' => "Account Information",
+        'body' => "Dear $nickName,\nCongratulations for registration our classroom.\n\nLogin Id: $loginId\nPassword: $password\n\n(Classroom)
+        "
+        ]);*/
 
         return view('home/registration_success', ['loginId' => $loginId, 'password' => $password]);
 

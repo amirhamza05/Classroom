@@ -13,7 +13,7 @@ class NotificationDefaultTemplateController extends Controller
             'subject'       => "Welcome to [[app_name]]",
         ],
     ];
-    
+
     public static function get()
     {
         $templateList = [];
