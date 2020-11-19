@@ -30,7 +30,7 @@ class home extends Controller
         if (!Auth::check()) {
             return redirect('/');
         }
-         return view('home/dashboard');
+         return view('/teacher/dashboard');
     }
 
 
