@@ -87,7 +87,7 @@ class home extends Controller
         //echo "<pre>";
         //print_r($data);
         //echo "</pre>";
-
+        Notification::clearQueue();
 
         return;
 

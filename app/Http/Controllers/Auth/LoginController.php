@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Notification\NotificationController as Notification;
 
 //custom added
+use App\Http\Controllers\Notification\NotificationController as Notification;
+use App\Http\Controllers\Notification\Template\NotificationTemplateController as NotificationTemplate;
 use App\User;
 use DB;
 use Illuminate\Http\Request;
@@ -96,19 +97,23 @@ class LoginController extends Controller
 
         $nickName = $data['nick_name'];
 
-        $response = Notification::send('mail', [
-            'to'      => $data['email'],
-            'subject' => "Account Information",
-            'body'    => "Dear $nickName,<br/>Congratulations for registration our classroom.<br/><br/>Login Id: $loginId<br/>Password: $password<br/><br/>(Classroom)
-            ",
+        $notificationTemplate = NotificationTemplate::set('welcome', [
+            'nick_name' => $nickName,
+            'login_id'  => $loginId,
+            'password'  => $password,
         ]);
 
-        /*$response = Notification::send('sms',[
-        'to' => $data['phone'],
-        'subject' => "Account Information",
-        'body' => "Dear $nickName,\nCongratulations for registration our classroom.\n\nLogin Id: $loginId\nPassword: $password\n\n(Classroom)
-        "
-        ]);*/
+        Notification::send('mail', [
+            'to'        => $data['email'],
+            'from_name' => $notificationTemplate['from_name'],
+            'subject'   => $notificationTemplate['subject'],
+            'body'      => $notificationTemplate['mail_body'],
+        ]);
+
+        Notification::send('sms', [
+            'to'   => $data['phone'],
+            'body' => $notificationTemplate['sms_body'],
+        ]);
 
         return view('home/registration_success', ['loginId' => $loginId, 'password' => $password]);
 

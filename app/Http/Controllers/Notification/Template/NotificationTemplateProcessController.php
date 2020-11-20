@@ -26,7 +26,7 @@ class NotificationTemplateProcessController extends Controller
             'app_name' => config('app.name'),
         ];
     }
-    
+
     public function set($templateName = '', $variableData = [])
     {
         $this->templateData = $this->getTemplateData($templateName);
@@ -57,7 +57,7 @@ class NotificationTemplateProcessController extends Controller
         }
 
         if (!isset($this->variableData[0])) {
-            $this->singleTemplate($this->variableData);
+            return $this->singleTemplate($this->variableData);
         }
 
         $templateData = [];

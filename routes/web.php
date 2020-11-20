@@ -15,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 #guest user login option
 Route::get('/', "Home\home@home");
+
+Route::get('/notification_template', "Notification\NotificationController@loadTemplateList");
+
+Route::get('/notification_socket', function(){
+	return view("notification/queue/clear_queue");
+});
+
+Route::get('/clear_queue', "Notification\NotificationController@clearQueue");
+
 Route::get('/admin/dashboard', "Home\home@home");
 Route::post('/home', 'Home\home@loadPage');
 
