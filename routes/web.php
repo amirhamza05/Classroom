@@ -11,45 +11,49 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 #guest user login option
+
 Route::get('/', "Home\home@home");
 
-Route::get('/notification_template', "Notification\NotificationController@loadTemplateList");
-
-Route::get('/notification_socket', function(){
-	return view("notification/queue/clear_queue");
+//guest group
+Route::group(['middleware' => ['guest']], function () {
+    Route::post('/login', 'Auth\LoginController@login');
+    Route::post('/registration', 'Auth\LoginController@registration');
+    Route::get('/registration', function () {
+        return view("home/registration");
+    });
+    Route::get('/login', function () {
+        return view("home/login");
+    });
+    Route::get('/notification_socket', function () {
+        return view("notification/queue/clear_queue");
+    });
 });
 
-Route::get('/clear_queue', "Notification\NotificationController@clearQueue");
+Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
+    Route::get('/dashboard', 'Home\home@teacherDashboard');
+    Route::get('/logout', 'Auth\LoginController@logout');
 
-Route::get('/admin/dashboard', "Home\home@home");
-Route::post('/home', 'Home\home@loadPage');
-
-
-//Route::post('/home', 'Home\home@loadPage');
-
-
-Route::post('/login', 'Auth\LoginController@login');
-Route::post('/registration', 'Auth\LoginController@registration');
-Route::get('/registration', function(){
-	return view("home/registration");
+    //profile
+    Route::get('/profile', 'User\LoginUserController@getProfile');
+    Route::get('/class', 'User\LoginUserController@getProfile');
+    Route::get('/routine', 'User\LoginUserController@getProfile');
+    Route::get('/update_profile', function(){
+        return view('user.update_profile');
+    });
 });
 
 Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin1', function () {
         echo "admin dashboard ";
     });
+    Route::get('/notification_template', "Notification\NotificationController@loadTemplateList");
+    Route::get('/clear_queue', "Notification\NotificationController@clearQueue");
 });
 
-
-
-
 Route::get('/test', "Home\home@test");
-Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::get('/student/dashboard', 'Home\home@studentDashboard');
-Route::get('/teacher/dashboard', 'Home\home@teacherDashboard');
-
-
+Route::get('/logout', 'Auth\LoginController@logout');

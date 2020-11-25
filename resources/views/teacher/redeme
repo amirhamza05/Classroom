@@ -1,1 +1,23 @@
+@extends('layout')
+@section('content')
+	
+	<div class="row">
+		<div class="col-md-2">
+			<div  style="background-color: #000000;color: #ffffff">
+				sdfa sdfi am the home page
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div  style="background-color: #000000;color: #ffffff">
+				sdfa sdfi am the home page
+			</div>
+		</div>
 
+		<div class="col-md-6">
+			<div  style="background-color: #000000;color: #ffffff">
+				sdfa sdfi am the home page
+			</div>
+		</div>
+	</div>
+    
+@stop

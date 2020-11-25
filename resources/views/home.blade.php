@@ -17,8 +17,8 @@
 	<script type="text/javascript" src="http://coderoj.com/style/lib/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="http://coderoj.com/style/lib/editarea_0_8_2/edit_area/edit_area_full.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Exo 2" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="assets/css/home.css">
-	<script type="text/javascript" src="assets/js/home/home.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/home.css">
+	<script type="text/javascript" src="js/home/home.js"></script>
 <script type="text/javascript">
 	var _token = "{{ csrf_token() }}";
 </script>
@@ -33,7 +33,7 @@
 					<span class="doubleTxtBlue titleTxt">Room</span>
 				</div>
 			</div>
-			<img style="width: 90%" src="assets/file/site/studying.svg">
+			<img style="width: 90%" src="{{asset('file/site/studying.svg')}}">
 		</div>
 	</div>
 	<div class="col-md-4">

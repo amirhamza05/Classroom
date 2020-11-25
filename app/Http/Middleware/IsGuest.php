@@ -19,6 +19,6 @@ class IsGuest
         if (!Auth::user()) {
              return $next($request);
         }
-        return $next($request);
+        return redirect('/');
     }
 }

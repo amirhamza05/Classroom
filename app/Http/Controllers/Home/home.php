@@ -26,11 +26,12 @@ class home extends Controller
         echo "<center><h1>welcome student dashboard <a href='/logout'>Logout</a></h1></center>";
     }
 
-    public function teacherDashboard(){
+    public function teacherDashboard(Request $request){
         if (!Auth::check()) {
             return redirect('/');
         }
-         return view('/teacher/dashboard');
+        $layout = isset($request->noLayout)?'body_layout':'layout';
+        return view("teacher.dashboard",['layout'=>$layout]);
     }
 
 
