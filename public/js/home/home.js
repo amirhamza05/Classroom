@@ -1,46 +1,3 @@
-$(document).ready(function() {
-    $(".sidebar a").click(function(e) {
-        var title = $(this).attr("title");
-        if(title == "logout")return;
-
-        //add active class
-        $('.sidebar a li.active').removeClass('active');
-        $('#sidebar_'+title).addClass('active')
-
-        e.preventDefault();
-        var url = $(this).attr("href");
-        loader("body");
-        history.pushState('data', '', url);
-        $.get(url, {'noLayout' : 1}, function(response) {
-            $("#body").html(response);
-        });
-    });
-    
-    $(window).on('popstate', function(event) {
-        var url = window.location.href; 
-        setActiveClass(url);
-        loader("body");
-        $.get(url, {'noLayout' : 1}, function(response) {
-            $("#body").html(response);
-        });
-    });
-
-    function setActiveClass(url){
-        var sidebarList = [ 
-            "dashboard", 
-            "class", 
-            "routine",
-            "profile",
-        ];
-        jQuery.grep(sidebarList, function(option, i) {      
-            if(url.indexOf(option) >= 0){
-                $('.sidebar a li.active').removeClass('active');
-                $('#sidebar_'+option).addClass('active');
-                return;
-            }
-        }).length;
-    }
-});
 
 function btnOff(btnId, txt) {
     txt = !txt ? "" : txt;
@@ -53,8 +10,11 @@ function btnOn(btnId, txt) {
     $("#" + btnId).removeAttr("disabled");
     if (txt != "") $("#" + btnId).html(txt);
 }
+
+
+
 function loader(divName){
-    $("#"+divName).html('<div style="display: flex;justify-content: center;align-items: center;"><img style="position:absolute;top: 30%;height: 100px; width: 100px;" src="https://retchhh.files.wordpress.com/2015/03/loading4.gif"></div>');
+    $("#"+divName).html('<div style="text-align: center;"><img style="top: 30%;height: 100px; width: 100px;" src="https://retchhh.files.wordpress.com/2015/03/loading4.gif"></div>');
 }
 
 

@@ -1,5 +1,10 @@
 body {
     font-family: "Exo 2";
+    background-color: #f9f9f9;
+}
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
 }
 :root {
     --red: #FA3E50;
@@ -24,8 +29,7 @@ body {
     border-radius: 5px;
     padding: 25px 15px 25px 15px;
 }
-
-.loginArea input,select {
+.loginArea input, select {
     padding: 10px;
     width: 100%;
     border-radius: 3px;
@@ -35,7 +39,7 @@ body {
     margin-bottom: 10px;
     background-color: #f9f9f9;
 }
-.loginArea input:focus,select:focus {
+.loginArea input:focus, select:focus {
     outline: none;
     border-radius: 5px;
     border: 1px solid var(--blue);
@@ -67,7 +71,6 @@ body {
     width: 150px;
     margin-bottom: 15px;
 }
-
 .homeTextArea {
     margin-bottom: 40px;
 }
@@ -93,8 +96,7 @@ body {
     margin: 10px 0px 10px 0px;
     font-weight: bold;
 }
-
-.homeLoginBtn{
+.homeLoginBtn {
     width: 90%;
     padding: 12px;
     border-width: 0px;
@@ -103,13 +105,12 @@ body {
     margin-bottom: 5px;
     margin-left: -2px;
 }
-.homeLoginBtnIcon{
+.homeLoginBtnIcon {
     font-size: 25px;
     background-color: var(--red);
     border-radius: 100%;
     height: 100px!important;
 }
-
 .btnRed {
     background-color: var(--red);
     border: 1px solid var(--red);
@@ -130,19 +131,44 @@ body {
 .btnBlue:focus {
     outline: none;
 }
-.loginArea a {
+a {
     color: var(--blue);
     margin-bottom: 5px;
 }
-.loginArea a:link {
+a:link {
     text-decoration: none;
 }
-.loginArea a:visited {
+a:visited {
     text-decoration: none;
 }
-.loginArea a:hover {
+a:hover {
     text-decoration: none;
 }
-.loginArea a:active {
+a:active {
     text-decoration: none;
+}
+
+/*button*/
+button {
+    background-color: var(--red);
+    color: #ffffff;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+ button:hover {
+    opacity: 0.8;
+    color: #ffffff;
+}
+
+ button:disabled {
+    opacity: 0.8;
+    color: #ffffff;
+}
+
+button:focus {
+    outline: none;
 }

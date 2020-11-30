@@ -5,9 +5,9 @@
             'icon'  => 'fas fa-home',
             'title' => 'Dashboard'
         ],
-        'class' => [
+        'course' => [
             'icon'  => 'fas fa-chalkboard-teacher',
-            'title' => 'Class'
+            'title' => 'Courses'
         ],
         'routine' => [
             'icon'  => 'fas fa-calendar-alt',
@@ -24,7 +24,7 @@
     ];
 @endphp
 
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div>EduHome</div>
         </div>
@@ -51,3 +51,6 @@
         </ul>
     </div>
 </div>
+<script type="text/javascript">
+   
+</script>

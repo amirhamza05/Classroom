@@ -22,31 +22,33 @@
     left: 0;
     top: 0;
     z-index: 100;
-    background: #2D214A;
-    color: #ffffff;
+    background: #ffffff;
+    color: #aaaaaa;
     overflow-y: auto;
     transition: width 500ms;
     -moz-box-shadow:    -3px 0 7px 0 #555;
     -webkit-box-shadow: -3px 0 7px 0 #555;
     box-shadow:         -3px 0 7px 0 #555;
+
 }
 
 .sidebar-header {
     font-size: 45px;
     padding: 5px 3px 5px 3px;
-    box-shadow: 3px 0 7px 0 #555;
+    
     text-align: center;
-    -webkit-text-fill-color: #eeeeee;
+    -webkit-text-fill-color: var(--blue);
     /* Will override color (regardless of order) */
     -webkit-text-stroke-width: 0.04em;
-    -webkit-text-stroke-color: var(--red);
+    -webkit-text-stroke-color: var(--blue);
+    
 }
 
 .sidebar-user-info{
     padding: 10px;
     text-align: center;
-    color: #ffffff;
-    background: linear-gradient(90deg, rgba(110, 221, 59, 0.1), rgba(59, 125, 221, .0875) 50%, transparent);
+    color: var(--blue);
+    border-bottom: 1px solid #f3f3f3;
 }
 
 .sidebar-menu {
@@ -64,24 +66,23 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     transition: 0.2s ease;
-    color: #95a5a6;
-    font-size: 1.4rem;
+    color: #7f8c8d;
+    font-size: 14px;
 }
 .sidebar ul li .fas{
     font-size: 1.6rem;
 }
 
 .sidebar .active{
-    color: #e9ecef!important;
+    color: var(--blue);
     font-weight: bold;
     background: linear-gradient(90deg, rgba(110, 221, 59, 0.1), rgba(59, 125, 221, .0875) 50%, transparent);
-    border-left: 5px solid var(--red);
+    border-right: 5px solid var(--blue);
 }
 
 .sidebar ul li:hover {
-    color: #e9ecef!important;
-    background: linear-gradient(90deg, rgba(110, 221, 59, 0.1), rgba(59, 125, 221, .0875) 50%, transparent);
-    border-left: 5px solid var(--red);
+    color: var(--blue)!important;
+    
 }
 
 .sidebar a {

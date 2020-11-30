@@ -15,4 +15,7 @@
 
 <link rel="stylesheet" type="text/css" href="{{asset('css/sidebar.css')}}">
 <script type="text/javascript" src="{{asset('js/home/home.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/classroom/classroom.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/script.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="{{asset('css/home.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/modal.css')}}">

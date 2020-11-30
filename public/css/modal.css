@@ -1,0 +1,104 @@
+
+/*start modal css*/
+
+.modal-backdrop {
+  opacity: 0.9 !important;
+}
+
+.modal-content {
+  border-radius: 0px;
+}
+
+.modal_sm .modal-dialog {
+  max-width: 350px;
+  width: 100%;
+}
+
+.modal_md .modal-dialog {
+  max-width: 600px;
+  width: 100%;
+}
+
+.modal_lg .modal-dialog {
+  max-width: 950px;
+  width: 100%;
+}
+
+.modal_header {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.modal_sm_body,
+.modal_md_body,
+.modal_lg_body {
+  padding: 20px;
+  background-color: #FFFFFF;        /*overflow: scroll;*/
+
+  /*max-height: 500px;*/
+}
+
+.modal-content {
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  border-radius: 0px 0px 5px 5px !important;
+}
+
+.modal_content_header {
+  background-color: #F8F8F8;
+  color: #506685;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid #eeeeee;
+  border-width: 0px 0px 1px 0px;
+}
+
+.modal_header .close {
+  margin: 0;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  color: #5b5757;
+  font-size: 25px;
+  opacity: 1;
+  z-index: 10;
+}
+
+.modal_header .close:hover {
+  outline: none;
+  font-size: 27px;
+  color: #000000;
+}
+
+.modal_header .close:focus {
+  outline: none;
+  font-size: 27px;
+  color: #000000;
+}
+
+.modal_error {
+  padding: 5px;
+  color: #C47A77;
+  font-size: 15px;
+  font-weight: bold;
+  border: 1px dotted #ECCDD1;
+  display: none;
+  background-color: #F2DEDE;
+  margin-bottom: 10px;
+}
+
+.modal_msg {
+  padding: 5px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  border: 1px dotted #10ac84;
+  display: none;
+  background-color: #1dd1a1;
+  margin-bottom: 10px;
+}
+
+.modal_error li {
+}
+
+/*end modal css*/

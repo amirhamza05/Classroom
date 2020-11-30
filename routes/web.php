@@ -38,8 +38,24 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
 
     //profile
     Route::get('/profile', 'User\LoginUserController@getProfile');
-    Route::get('/class', 'User\LoginUserController@getProfile');
+
+    //---course 
+    //get
+    Route::get('/course', 'Course\CoursePageController@viewCourseList');
+    Route::get('/create_course', 'Course\CoursePageController@createCourse');
+
+    Route::group(['prefix' => 'course/{courseId}','middleware' => ['course']], function(){
+        Route::get('/', 'Course\CoursePageController@viewDashboard');
+        Route::get('/dashboard', 'Course\CoursePageController@viewDashboard');
+    });
+
+    //post
+    Route::post('/create_course', 'Course\CourseController@create');
+
+    //end classroom --------------------
+
     Route::get('/routine', 'User\LoginUserController@getProfile');
+
     Route::get('/update_profile', function(){
         return view('user.update_profile');
     });

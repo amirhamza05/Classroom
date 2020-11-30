@@ -11,7 +11,6 @@ class UserController extends Controller
 
    	}
    	//public function updateProfilePhoto(Request $request){
-
    	//}
    	public function changePassword(Request $request){
 
