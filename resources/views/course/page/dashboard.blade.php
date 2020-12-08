@@ -38,7 +38,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="cover">
-			<img src="{{asset('upload/course/theme/'.$courseData->cover)}}" style="">
+			<img src="{{asset($courseData->cover)}}" style="">
 			<div class="body">
 				<font style="font-size: 30px;"><b>{{$courseData->name}}</b></font>
 				<table style="width: 300px;margin-top: 10px;">
@@ -63,3 +63,4 @@
 		</div>
 	</div>
 </div>
+<button style="margin-top: 150px;" onclick="deleteCourse()">Delete Course</button>

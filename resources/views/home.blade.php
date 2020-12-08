@@ -48,5 +48,3 @@
 	</div>
 </body>
 </html>
-
-{{isset($variable) ? $variable : ''}}

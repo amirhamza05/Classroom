@@ -16,7 +16,7 @@ class IsStudent
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() &&  Auth::user()->user_type == 'Student') {
+        if (Auth::user() &&  Auth::user()->isStudent()) {
              return $next($request);
         }
         return redirect('/');

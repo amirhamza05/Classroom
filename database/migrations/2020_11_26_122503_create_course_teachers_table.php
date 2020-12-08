@@ -18,7 +18,6 @@ class CreateCourseTeachersTable extends Migration
             $table->foreignId('user_id');
             $table->enum('role', ['admin', 'moderator'])->default('moderator');
 
-            $table->unique('course_id', 'user_id');
             $table->primary(['course_id', 'user_id']);
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');

@@ -1,7 +1,6 @@
 @extends($layout)
 @section('title', 'Course List')
 @section('content')
-	<title>Course List</title>
 	<style type="text/css">
 		.course-list{
 
@@ -122,24 +121,24 @@ button:focus {
 		<div class="course-list-body">
 			
 			<div class="row">
-			@foreach($courseList as $key => $value)
+			@foreach($courseList as $key => $data)
                <div class="col-md-3">
                		<div class="card">
                			<div class="card-header">
-               				<img src="{{asset('upload/course/theme/'.$value['cover'])}}">
+               				<img src="{{asset($data->cover)}}">
                				<div style="margin-top: -60px;padding-left: 5px;color: #ffffff">
-               					<font size="5px;"><b>{{$value['name']}}</b></font><br/>
-               					<div style="margin-top: -5px;">{{$value['code']}}</div>
+               					<font size="5px;"><b>{{$data->name(16)}}</b></font><br/>
+               					<div style="margin-top: -5px;">{{$data->code}}</div>
                				</div>
                			</div>
                			<div class="card-body" style="margin-top: 15px;">
                				
-               				Subject: {{$value['subject']}}<br/>
-               				Section: {{$value['section']}}<br/>
-               				Room: {{$value['room']}}<br/>
+               				Subject: {{$data->subject}}<br/>
+               				Section: {{$data->section}}<br/>
+               				Room: {{$data->room}}<br/>
                			</div>
                			<div class="card-footer">
-               				<a href="{{url('teacher/course/'.$value['id'])}}" title="View"><button style="width: 100%; background-color: #F2F6F4; color: var(--blue)"><b>View</b></button></a>
+               				<a href="{{url('teacher/courses/'.$data->id)}}" page-title='{{$data->name}}' title="View"><button style="width: 100%; background-color: #F2F6F4; color: var(--blue)"><b>View</b></button></a>
                			</div>
                		</div>
                </div>
@@ -148,9 +147,5 @@ button:focus {
 			
 		</div>
 	</div>
-<script type="text/javascript">
-		$("a").click(function(e) {
-    	});
-	</script>
 
 @stop

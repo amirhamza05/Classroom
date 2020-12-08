@@ -18,8 +18,6 @@ class CreateCourseStudentsTable extends Migration
             $table->foreignId('user_id');
             $table->enum('status', ['accept', 'pending'])->default('accept');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-
-            $table->unique('course_id', 'user_id');
             $table->primary(['course_id', 'user_id']);
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');

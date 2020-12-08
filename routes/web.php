@@ -41,16 +41,19 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
 
     //---course 
     //get
-    Route::get('/course', 'Course\CoursePageController@viewCourseList');
-    Route::get('/create_course', 'Course\CoursePageController@createCourse');
+    Route::get('/courses', 'Course\CoursePageController@viewCourseList');
+    Route::get('/courses/create', 'Course\CoursePageController@createCourse');
 
-    Route::group(['prefix' => 'course/{courseId}','middleware' => ['course']], function(){
+    Route::group(['prefix' => 'courses/{course_id}','middleware' => ['course']], function(){
         Route::get('/', 'Course\CoursePageController@viewDashboard');
         Route::get('/dashboard', 'Course\CoursePageController@viewDashboard');
+        Route::get('/teachers', 'Course\CoursePageController@viewTeacherList'); 
+        Route::post('/teachers/create', 'Course\CourseController@addTeacher');
+        Route::post('/delete', 'Course\CourseController@delete');
     });
 
     //post
-    Route::post('/create_course', 'Course\CourseController@create');
+    Route::post('/courses/create', 'Course\CourseController@create');
 
     //end classroom --------------------
 

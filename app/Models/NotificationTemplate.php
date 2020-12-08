@@ -1,18 +1,19 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class NotificationQueue extends Model
+class NotificationTemplate extends Model
 {
-    public $timestamps = true;
+ 	public $timestamps = true;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'type','to','from_name', 'subject', 'body'
+        'template_name', 'from_name', 'subject', 'sms_body', 'mail_body'
     ];
+    
 }

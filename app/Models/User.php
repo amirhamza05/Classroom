@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'login_id', 'user_type', 'full_name', 'nick_name', 'email', 'phone', 'password', 'phone_verified', 'email_verified'
+        'login_id', 'user_type', 'full_name', 'nick_name', 'email', 'phone', 'password', 'phone_verified', 'email_verified',
     ];
 
     /**
@@ -27,12 +27,17 @@ class User extends Authenticatable
         'password',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function isTeacher()
+    {
+        return $this->user_type == "Teacher" ? 1 : 0;
+    }
+    public function isStudent()
+    {
+        return $this->user_type == "Student" ? 1 : 0;
+    }
+    public function isAdmin()
+    {
+        return $this->user_type == "Student" ? 1 : 0;
+    }
+
 }

@@ -16,7 +16,8 @@ class IsTeacher
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() &&  Auth::user()->user_type == 'Teacher') {
+        
+        if (Auth::user() &&  Auth::user()->isTeacher()) {
              return $next($request);
         }
         return redirect('/');

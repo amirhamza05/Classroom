@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Course;
+use App\Models\Course;
 
 class CheckCourse
 {
@@ -16,7 +16,7 @@ class CheckCourse
      */
     public function handle($request, Closure $next)
     {
-        $courseId = $request->courseId;
+        $courseId = $request->course_id;
         $courseData = Course::find($courseId);
         if(!isset($courseData)){
             return abort(404, 'Course Not Found.');

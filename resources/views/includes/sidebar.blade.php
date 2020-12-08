@@ -5,7 +5,7 @@
             'icon'  => 'fas fa-home',
             'title' => 'Dashboard'
         ],
-        'course' => [
+        'courses' => [
             'icon'  => 'fas fa-chalkboard-teacher',
             'title' => 'Courses'
         ],
@@ -38,7 +38,7 @@
     <div class="sidebar-menu">
         <ul class="nav">
             @foreach($teacherSideBar as $key => $value)
-               <a href="{{url($userType.'/'.$key)}}" title="{{$key}}">
+               <a href="{{url($userType.'/'.$key)}}" page-title="{{$value['title']}}" title="{{$key}}">
                     <li id="sidebar_{{$key}}" class="{{ request()->is($userType.'/'.$key) ? 'active' : '' }}">
                         <div class="li-area">
                             <span class="{{$value['icon']}}"></span>

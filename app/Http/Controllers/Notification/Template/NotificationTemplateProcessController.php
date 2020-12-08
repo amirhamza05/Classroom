@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Notification\Template;
 use App\Http\Controllers\Controller;
 
 //model
-use App\NotificationTemplate;
+use App\Models\NotificationTemplate;
 
 class NotificationTemplateProcessController extends Controller
 {

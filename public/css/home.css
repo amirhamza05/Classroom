@@ -172,3 +172,91 @@ button {
 button:focus {
     outline: none;
 }
+
+
+/*start toast*/
+.top-alert {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 10000;
+  left: 0;
+  padding: 10px;
+  display: inline-block;
+  text-align: center;
+}
+
+.top-alert .alert {
+  width: auto !important;
+  height: 100%;
+  display: inline;
+  position: relative;
+  margin-top: 0px;
+  max-width: 400px;
+  min-width: 250px;
+}
+
+.top-alert .alert .close {
+  position: absolute;
+  top: 11px;
+  right: 2px;
+  padding-right: 6px;
+  color: #ffffff;
+}
+
+.toast-close {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  font-size: 19px;
+  padding: 0px;
+  margin-left: 4px;
+}
+
+.toast-icon {
+  font-size: 1.3em;
+  margin-right: 7px;
+}
+
+.alert-info-alt,
+.alert-danger-alt,
+.alert-warning-alt,
+.alert-success-alt {
+  color: #fff;
+  padding: 13px 10px 13px 7px;
+  float: right;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 0px;
+  border-width: 0px 0px 0px 7px !important;
+}
+
+.alert-purple {
+  background: #694D9F;
+  border-color: #694D9F;
+}
+
+.alert-info-alt {
+  background: #527FA6;
+  border-color: #B4E1E4;
+}
+
+.alert-danger-alt {
+  background: #E26868;
+  border-color: #B63E5A;
+}
+
+.alert-warning-alt {
+  background: #e67e22;
+  border-color: #d35400;
+}
+
+.alert-success-alt {
+  background: #1abc9c;
+  border-color: #16a085;
+}
+
+.alert a {
+  color: gold;
+}
+
+/*end toast*/

@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 //custom added
 use App\Http\Controllers\Notification\NotificationController as Notification;
 use App\Http\Controllers\Notification\Template\NotificationTemplateController as NotificationTemplate;
-use App\User;
+use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

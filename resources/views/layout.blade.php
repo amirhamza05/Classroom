@@ -4,7 +4,7 @@
         @include('includes.head')
         @include('includes.modal')
         @include('includes.loader')
-        <title>App Name - @yield('title')</title>
+        <title>@yield('title') - {{config('app.name')}} </title>
     </head>
     <body>
         @include('includes.sidebar')
@@ -17,4 +17,5 @@
             </div>
         </div>
     </body>
+    @include('includes.footer')
 </html>

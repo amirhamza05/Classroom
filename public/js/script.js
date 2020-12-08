@@ -1,42 +1,22 @@
 //single page load
 $(document).ready(function() {
-    
     $('body').on('click', 'a', function(e) {
         var title = $(this).attr("title");
         if (title == "logout") return;
         e.preventDefault();
-
-        //change url
-        var url = $(this).attr("href");
-        history.pushState('data', '', url);
+        url.load($(this).attr("href"));
         setActiveSidebarClass();
-        
-        $("#topLoader").show();
-
-        var data = {
-            'noLayout': 1
-        };
-        $.get(url, data, function(response) {
-            $("#body").html(response);
-            $("#topLoader").hide(100);
-        });
     });
     $(window).on('popstate', function(event) {
         setActiveSidebarClass();
         $("#topLoader").show();
-        $.get(url, {
-            'noLayout': 1
-        }, function(response) {
-            $("#body").html(response);
-            $("#topLoader").hide(100);
-        });
+        url.load();
     });
 
     function setActiveSidebarClass() {
-        url = window.location.href;
-        var sidebarList = ["dashboard", "course", "routine", "profile", ];
+        var sidebarList = ["dashboard", "courses", "routine", "profile", ];
         jQuery.grep(sidebarList, function(option, i) {
-            if (url.indexOf(option) >= 0) {
+            if (url.get().indexOf(option) >= 0) {
                 $('.sidebar a li.active').removeClass('active');
                 $('#sidebar_' + option).addClass('active');
                 return;
@@ -44,6 +24,37 @@ $(document).ready(function() {
         }).length;
     }
 });
+
+var app = {
+    'name': $('meta[name="app-name"]').attr('content'),
+    'token': $('meta[name="csrf-token"]').attr('content'),
+    setToken: function(data) {
+        data = !data ? {} : data;
+        data['_token'] = this.token;
+        return data;
+    }
+};
+
+var url = {
+    get: function() {
+        return window.location.href;
+    },
+    set: function(data, title, url) {
+        history.pushState(data, title, url);
+    },
+    load: function(url) {
+        if (url) this.set('', '', url);
+        $("#topLoader").show();
+        var data = {
+            'noLayout': 1
+        };
+        $.get(this.get(), data, function(response) {
+            $("#body").html(response);
+            $("#topLoader").hide(100);
+            document.title = $(response).filter('title').text();
+        });
+    }
+};
 //start button
 var btn = {
     off: function(btnId, txt) {
@@ -104,3 +115,39 @@ function modalOpen(type, header) {
 function modalClose(type) {
     $("#modal_" + type).modal("hide");
 }
+//end modal
+// start toast script
+var toast = {
+    success: function(msg) {
+        makeToast("success", msg)
+    },
+    danger: function(msg) {
+        makeToast("danger", msg)
+    },
+    info: function(msg) {
+        makeToast("info", msg)
+    },
+    warning: function(msg) {
+        makeToast("warning", msg)
+    }
+};
+
+function makeToast(toastType, toastMsg) {
+    var toastIconList = {};
+    toastIconList['success'] = 'check-circle';
+    toastIconList['danger'] = 'times-circle';
+    toastIconList['warning'] = 'exclamation-circle';
+    toastIconList['info'] = 'info-circle';
+    var toastIcon = toastIconList[toastType];
+    var dom = '<div class="top-alert"><div class="alert alert-' + toastType + '-alt alert-dismissable fade in " role="alert"><i class="fas fa-' + toastIcon + ' toast-icon"></i>' + toastMsg + '<button type="button" class="toast-close" data-dismiss="alert" aria-label="Close">×</button></div></div>';
+    var jdom = $(dom);
+    jdom.hide();
+    $("body").append(jdom);
+    jdom.fadeIn();
+    setTimeout(function() {
+        jdom.fadeOut(function() {
+            jdom.remove();
+        });
+    }, 2000);
+}
+// end toast script
