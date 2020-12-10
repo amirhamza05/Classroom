@@ -21,12 +21,9 @@
 
 <link href="https://fonts.googleapis.com/css?family=Exo 2" rel="stylesheet">
 <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/preload.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/home/home.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/course/course.js')}}"></script>
-
 <link rel="stylesheet" type="text/css" href="{{asset('css/sidebar.css')}}">
+
 <link rel="stylesheet" type="text/css" href="{{asset('css/home.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/modal.css')}}">
-<script type="text/javascript">
-	var _token = $('meta[name="csrf-token"]').attr('content');
-</script>

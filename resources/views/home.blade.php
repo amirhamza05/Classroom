@@ -19,6 +19,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Exo 2" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
 	<script type="text/javascript" src="js/home/home.js"></script>
+<style type="text/css">
+	body{
+		background: #ffffff;
+	}
+</style>
 <script type="text/javascript">
 	var _token = "{{ csrf_token() }}";
 </script>

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 //custom controllers
 use App\Http\Controllers\Notification\NotificationController as Notification;
 use App\Http\Controllers\Notification\Template\NotificationTemplateController as NotificationTemplate;
-
+use App\Http\Controllers\Layout\LayoutController as Layout;
 use Validator;
 
 
@@ -30,8 +30,7 @@ class home extends Controller
         if (!Auth::check()) {
             return redirect('/');
         }
-        $layout = isset($request->noLayout)?'body_layout':'layout';
-        return view("teacher.dashboard",['layout'=>$layout]);
+        return Layout::view("teacher.dashboard");
     }
 
 

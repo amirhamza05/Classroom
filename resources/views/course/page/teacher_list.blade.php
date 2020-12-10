@@ -1,6 +1,6 @@
 @extends($layout)
 @section('title', 'Teachers in '.$courseData->name)
-@section('content')
+
 	<style type="text/css">
 		.course .header{
 			font-size: 14px;
@@ -116,5 +116,3 @@
 		</div>
 		
 	</div>
-	
-@stop

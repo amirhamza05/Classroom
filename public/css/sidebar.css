@@ -26,10 +26,7 @@
     color: #aaaaaa;
     overflow-y: auto;
     transition: width 500ms;
-    -moz-box-shadow:    -3px 0 7px 0 #555;
-    -webkit-box-shadow: -3px 0 7px 0 #555;
-    box-shadow:         -3px 0 7px 0 #555;
-
+    border-right: 1px solid #eeeeee;
 }
 
 .sidebar-header {
@@ -48,11 +45,14 @@
     padding: 10px;
     text-align: center;
     color: var(--blue);
-    border-bottom: 1px solid #f3f3f3;
+    border-bottom: 1px solid #eeeeee;
+    margin: 0px 20px 0px 20px;
+    padding-bottom: 20px;
 }
 
 .sidebar-menu {
     padding: 0rem;
+    padding-top: 20px;
 }
 .sidebar-header .brand .title {
     margin-right: 10px;
@@ -61,27 +61,33 @@
     font-size: large;
 }
 .sidebar ul li {
-    padding: 15px 20px 15px 20px;
-    border-bottom: 1px solid #291396;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 10px 0px 10px 25%;
     transition: 0.2s ease;
-    color: #7f8c8d;
+    color: #546E7A;
     font-size: 14px;
+
 }
 .sidebar ul li .fas{
-    font-size: 1.6rem;
+    font-size: 18px;
+    width: 22px;
+    /*background-color: #000000;*/
+    text-align: center;
+}
+.sidebar .li-title{
+    margin-left: 0px;
+
 }
 
 .sidebar .active{
-    color: var(--blue);
+    color: var(--red);
     font-weight: bold;
-    background: linear-gradient(90deg, rgba(110, 221, 59, 0.1), rgba(59, 125, 221, .0875) 50%, transparent);
-    border-right: 5px solid var(--blue);
+    /*background: linear-gradient(90deg, rgba(110, 221, 59, 0.1), rgba(59, 125, 221, .0875) 50%, transparent);*/
+    border-right: 5px solid var(--red);
 }
 
 .sidebar ul li:hover {
-    color: var(--blue)!important;
+    color: var(--red)!important;
+    font-weight: bold;
     
 }
 
@@ -105,6 +111,8 @@
     font-size: 8px!important;
     margin-top: 2px!important;
 }
+
+
 
 @media only screen and (max-width: 950px) {
     .sidebar {

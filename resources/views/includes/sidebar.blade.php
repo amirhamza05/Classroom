@@ -30,7 +30,7 @@
         </div>
         <a title="profile" class="inbox-avatar" style="border-radius: 0%" href="{{url($userType.'/profile')}}">
             <div class="sidebar-user-info">
-                <img style="border-radius: 100%;border: 1px solid #ffffff"  width="74" hieght="70" src="{{asset('upload/avatars/default_avatar.png')}}">
+                <img style="border-radius: 100%;border: 1px solid #eeeeee"  width="74" hieght="70" src="{{asset('upload/avatars/default_avatar.png')}}">
                 <div style="font-size: 17px;font-weight: bold;">{{Auth::user()->full_name}}</div>
                 <div style="font-size: 14px;">{{Auth::user()->user_type}}</div>
             </div>

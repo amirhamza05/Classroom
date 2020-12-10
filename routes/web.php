@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 #guest user login option
 
 Route::get('/', "Home\home@home");
-
+Route::get('/modal', function(){
+    return view('includes.modal');
+});
 //guest group
 Route::group(['middleware' => ['guest']], function () {
     Route::post('/login', 'Auth\LoginController@login');

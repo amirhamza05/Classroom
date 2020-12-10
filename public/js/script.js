@@ -23,8 +23,8 @@ $(document).ready(function() {
             }
         }).length;
     }
-});
 
+});
 var app = {
     'name': $('meta[name="app-name"]').attr('content'),
     'token': $('meta[name="csrf-token"]').attr('content'),
@@ -34,24 +34,27 @@ var app = {
         return data;
     }
 };
-
 var url = {
     get: function() {
         return window.location.href;
     },
     set: function(data, title, url) {
-        history.pushState(data, title, url);
+        if (this.get() != url) history.pushState(data, title, url);
     },
     load: function(url) {
         if (url) this.set('', '', url);
         $("#topLoader").show();
         var data = {
-            'noLayout': 1
+            'load_content': 0
         };
         $.get(this.get(), data, function(response) {
-            $("#body").html(response);
             $("#topLoader").hide(100);
+            $("#body").html(response);
             document.title = $(response).filter('title').text();
+        }).fail(function(error) {
+            $("#topLoader").hide(100);
+            toast.danger(error.responseJSON.error);
+            parent.history.back();
         });
     }
 };

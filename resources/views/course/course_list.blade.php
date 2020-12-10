@@ -1,6 +1,5 @@
 @extends($layout)
 @section('title', 'Course List')
-@section('content')
 	<style type="text/css">
 		.course-list{
 
@@ -9,11 +8,10 @@
 		.course-list .header{
 			font-weight: bold;
 			font-size: 16px;
-			border: 2px solid #eeeeee;
+			border-bottom: 1px solid #eeeeee;
 			padding: 10px 5px 10px 5px;
 			height: 55px;
-			border-width: 0px 0px 1px 0px;
-			margin-left: 2px;
+			margin-left:0px;
 			position: -webkit-sticky;position: sticky;
   			top: 0;
   			background-color: #ffffff;
@@ -88,6 +86,7 @@ button:focus {
 	border: 1px solid #eeeeee;
 	box-shadow: 2px 2px 5px 2px #aaaaaa;
 	margin-bottom: 25px;
+	background-color: #ffffff;
 
 }
 .course-list .card:hover{
@@ -105,6 +104,7 @@ button:focus {
 
 	</style>
 	
+
 	<div class="course-list">
 		<div class="header">
 			<div class="row">
@@ -118,11 +118,13 @@ button:focus {
 				</div>
 			</div>
 		</div>
+
+
+
 		<div class="course-list-body">
-			
 			<div class="row">
 			@foreach($courseList as $key => $data)
-               <div class="col-md-3">
+               <div class="col-md-3 col-sm-4">
                		<div class="card">
                			<div class="card-header">
                				<img src="{{asset($data->cover)}}">
@@ -132,7 +134,6 @@ button:focus {
                				</div>
                			</div>
                			<div class="card-body" style="margin-top: 15px;">
-               				
                				Subject: {{$data->subject}}<br/>
                				Section: {{$data->section}}<br/>
                				Room: {{$data->room}}<br/>
@@ -147,5 +148,3 @@ button:focus {
 			
 		</div>
 	</div>
-
-@stop

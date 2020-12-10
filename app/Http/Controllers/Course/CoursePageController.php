@@ -5,39 +5,39 @@ namespace App\Http\Controllers\Course;
 use App\Models\Course;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Layout\LayoutController as Layout;
 
 class CoursePageController extends Controller
 {
-    public function getLayout($request)
+    public function __construct($foo = null)
     {
-        return isset($request->noLayout) ? 'body_layout' : 'layout';
+        return view('course.create_course');
+        //exit;
     }
-    public function mergeDefaultData($request, $data = [])
+    public function mergeDefaultData()
     {
-        $courseData = Course::where('id', $request->course_id)->get()->first();
-        return array_merge($data, [
-            'layout'     => $this->getLayout($request),
-            'courseData' => $courseData,
-        ]);
+        $courseData = Course::where('id', request()->course_id)->get()->first();
+        return [
+            'courseData' => $courseData
+        ];
     }
     public function createCourse()
     {
         return view('course.create_course');
     }
-    public function viewCourseList(Request $request)
+    public function viewCourseList()
     {
         $courseList = Course::all();
-        return view("course.course_list", [
-            'layout'     => $this->getLayout($request),
+        return Layout::view("course.course_list", [
             'courseList' => $courseList,
         ]);
     }
-    public function viewTeacherList(Request $request)
+    public function viewTeacherList()
     {
-        return view("course.page.teacher_list", $this->mergeDefaultData($request));
+        return Layout::view("course.page.teacher_list", $this->mergeDefaultData());
     }
-    public function viewDashboard(Request $request)
+    public function viewDashboard()
     {
-        return view("course.dashboard", $this->mergeDefaultData($request));
+        return Layout::view("course.dashboard", $this->mergeDefaultData());
     }
 }

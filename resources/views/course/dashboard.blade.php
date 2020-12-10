@@ -1,14 +1,12 @@
 @extends($layout)
 @section('title', $courseData->name)
-@section('content')
 	<style type="text/css">
 		.course .header{
 			font-size: 14px;
-			border: 2px solid #eeeeee;
+			border-bottom: 1px solid #eeeeee;
 			height: 55px;
 			padding-top: 16px;
-			border-width: 0px 0px 1px 0px;
-			margin-left: 2px;
+			margin-left: 0px;
 			overflow-x: auto;
 			position: -webkit-sticky;position: sticky;
   			top: 0;
@@ -26,5 +24,5 @@
 			@include("course.page.dashboard")
 		</div>
 	</div>
-@stop
+
 
