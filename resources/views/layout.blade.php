@@ -1,6 +1,8 @@
 <!DOCTYPE doctype html>
 <html>
-    <head>@include('includes.head')</head>
+    <head>
+    @include('includes.head')
+    </head>
     <body>
         <div id="pre-loader">@include('includes.preload')</div>
         <div id="body-area" style="display: none">

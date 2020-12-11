@@ -10,5 +10,5 @@
 		margin-top: -200px;
 	}
 </style>
-<img src="{{asset('file/site/preload.gif')}}">
+<img src="{{asset('img/site/preload.gif')}}">
 <div class="loadingTxt" id="loadingTxt">Loading 0%</div>

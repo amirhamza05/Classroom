@@ -14,39 +14,43 @@ class LayoutController extends Controller
         }
         return 1;
     }
-    public static function debugPage(){
-        return isset(request()->debug)? 1:0;
+    public static function debugPage()
+    {
+        return isset(request()->debug) ? 1 : 0;
     }
     public static function getLayout()
     {
         return self::isLayout() ? "layout" : 'body_layout';
     }
+    public static function compressLayoutHtml($html)
+    {
+        $html = str_replace("\n", "", $html);
+        $html = str_replace("\r", "", $html);
+        $html = str_replace("\t", "", $html);
+        $html = str_replace("  ", "", $html);
+        return $html;
+    }
+
     public static function view($page, $data = [])
     {
         if (isset(request()->preload_sidebar)) {
             $page = "includes.sidebar";
             //sleep(10);
-        }
-        else if (isset(request()->load_content) || isset(request()->debug)) {
+        } else if (isset(request()->load_content)) {
             $page = $page;
             //sleep(5);
-        }
-        else{
+        } else {
             $page = "preload_layout";
         }
 
-        $v = view($page, $data);
-
-        if($page == "preload_layout"){
-            $html = $v->render();
-            $html = str_replace("\n", "", $html);
-            $html = str_replace("\r", "", $html);
-            $html = str_replace("\t", "", $html);
-            $html = str_replace("  ", "", $html);
-            echo "$html";
-            return;
+        if ($page == "preload_layout") {
+            return self::compressLayoutHtml(view($page, $data)->render());
         }
-        
-        return $v;
+
+        if (self::debugPage()) {
+            return view($page, $data);
+        }
+
+        return view($page, $data);
     }
 }

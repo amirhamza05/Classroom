@@ -38,7 +38,7 @@
 					<span class="doubleTxtBlue titleTxt">Room</span>
 				</div>
 			</div>
-			<img style="width: 90%" src="{{asset('file/site/studying.svg')}}">
+			<img style="width: 90%" src="{{asset('img/site/studying.svg')}}">
 		</div>
 	</div>
 	<div class="col-md-4">

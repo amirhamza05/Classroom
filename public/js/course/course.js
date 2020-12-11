@@ -15,7 +15,7 @@ function deleteCourse(){
 function loadCreateCourse(){
 	modal.md.open("Create Course");
 	loader(modal.md.body);
-	$.get(url.get()+"/create", function(response) {
+	$.get(url.get(1)+"/create", function(response) {
     	modal.md.setBody(response);
     });
 }
@@ -31,7 +31,7 @@ function addTeacher(){
     var data = {
 		'user_id': userId,
 	};
-	$.post(url.get()+"/create", app.setToken(data), function(response) {
+	$.post(url.get(1)+"/create", app.setToken(data), function(response) {
         if(response.error == 1){
         	 toast.danger(response.errorMsg);
         }

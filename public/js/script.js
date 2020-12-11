@@ -23,7 +23,6 @@ $(document).ready(function() {
             }
         }).length;
     }
-
 });
 var app = {
     'name': $('meta[name="app-name"]').attr('content'),
@@ -35,7 +34,8 @@ var app = {
     }
 };
 var url = {
-    get: function() {
+    get: function(noParm) {
+        if (noParm) return location.protocol + '//' + location.host + location.pathname;
         return window.location.href;
     },
     set: function(data, title, url) {
@@ -48,9 +48,9 @@ var url = {
             'load_content': 0
         };
         $.get(this.get(), data, function(response) {
+            document.title = $(response).filter('title').text();
             $("#topLoader").hide(100);
             $("#body").html(response);
-            document.title = $(response).filter('title').text();
         }).fail(function(error) {
             $("#topLoader").hide(100);
             toast.danger(error.responseJSON.error);

@@ -33,7 +33,7 @@ class Course extends Model
 
     public function getCoverAttribute($value)
     {
-        return 'upload/course/theme/' . $value;
+        return 'img/course_theme/' . $value;
     }
 
     public function setUserIdAttribute($value)

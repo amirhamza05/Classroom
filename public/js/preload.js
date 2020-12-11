@@ -1,11 +1,11 @@
 $(document).ready(function() {
     var totalPreload = 3;
     var totalPreloadComplete = 0;
-    
-    setTimeout(function(){ preLoad(); }, 300);
+    setTimeout(function() {
+        preLoad();
+    }, 300);
 
     function preLoad() {
-        addScript();
         loadModal();
     }
 
@@ -36,22 +36,19 @@ $(document).ready(function() {
             'load_content': 1
         }
         $.get(url.get(), data, function(response) {
-            
-            if(response.error){
-               console.log(response.debug);
-               window.location.href = response.debug;
-            }
-            else{
+            if (response.error) {
+                window.location.href = response.debug;
+            } else {
                 $('#body').html(response);
                 totalPreloadComplete++;
                 setLoadingText("Success");
             }
-            console.log('load content');
+            //console.log('load content');
         });
     }
 
     function showBody() {
-        console.log(totalPreloadComplete);
+        //console.log(totalPreloadComplete);
         if (totalPreload == totalPreloadComplete) {
             $('#pre-loader').html("");
             $('#body-area').show();
@@ -59,20 +56,17 @@ $(document).ready(function() {
         }
     }
 
-    function setLoadingText(txt){
-        console.log(txt);
-        txt = Math.ceil((100*totalPreloadComplete)/totalPreload);
-        $("#loadingTxt").html("Loading "+txt+"%");
+    function setLoadingText(txt) {
+        txt = Math.ceil((100 * totalPreloadComplete) / totalPreload);
+        $("#loadingTxt").html("Loading " + txt + "%");
     }
 
-    function addScript(){
+    function addScript() {
         setLoadingText("Script");
-        var scriptElement = document.createElement( "script" );
-            scriptElement.src = "http://127.0.0.1:8000/js/course/course.js";
- 
-            $( document.head ).append( scriptElement );
+        var scriptElement = document.createElement("script");
+        scriptElement.src = "";
+        $(document.head).append(scriptElement);
     }
-
     var loadBody = setInterval(function() {
         showBody();
     }, 1000);

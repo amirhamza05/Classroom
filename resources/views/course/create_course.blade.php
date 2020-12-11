@@ -40,11 +40,11 @@
   		$("#create_course").submit(function(event){
     		event.preventDefault(); //prevent default action
     		var formData = $(this).serializeArray();
-    		$.post(url.get()+"/create", formData, function(response) {
+    		$.post(url.get(1)+"/create", formData, function(response) {
         		if (response.error == 0) {
         			modal.md.close();
         			toast.success(response.msg);
-        			url.load(url.get()+"/"+response.course_id);
+        			url.load(url.get(1)+"/"+response.course_id);
         		}
         		else {
             		$("#loginResponse").html(response.errorMsg);
