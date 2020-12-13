@@ -63,4 +63,3 @@
 		</div>
 	</div>
 </div>
-<button style="margin-top: 150px;" onclick="deleteCourse()">Delete Course</button>

@@ -21,30 +21,36 @@ $(document).ready(function() {
     function loadSidebar() {
         setLoadingText("Sidebar")
         var data = {
-            'preload_sidebar': 1
+            'preload_sidebar': 1,
+            'json': 1
         }
-        $.get(url.get(), data, function(response) {
+        $.get(url.get(), data).done(function(response) {
             $('#sidebar-area').html(response);
             totalPreloadComplete++;
             loadContent();
+        }).fail(function(error) {
+            checkError(error);
         });
     }
 
     function loadContent() {
         setLoadingText("Content");
         var data = {
-            'load_content': 1
+            'load_content': 1,
+            'json': 1
         }
-        $.get(url.get(), data, function(response) {
-            if (response.error) {
-                window.location.href = response.debug;
-            } else {
-                $('#body').html(response);
-                totalPreloadComplete++;
-                setLoadingText("Success");
-            }
-            //console.log('load content');
+        $.get(url.get(), data).done(function(response) {
+            $('#body').html(response);
+            totalPreloadComplete++;
+            setLoadingText("Success");
+        }).fail(function(error) {
+            checkError(error);
         });
+    }
+
+    function checkError(responseError) {
+        alert("Error Found\n------\n" + responseError.responseJSON.error);
+        window.location.href = responseError.responseJSON.debugUrl;
     }
 
     function showBody() {

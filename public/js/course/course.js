@@ -31,9 +31,27 @@ function addTeacher(){
     var data = {
 		'user_id': userId,
 	};
-	$.post(url.get(1)+"/create", app.setToken(data), function(response) {
+	$.get(url.get(1)+"/create", data, function(response) {
+        console.log(response);
         if(response.error == 1){
         	 toast.danger(response.errorMsg);
+        }
+        else{
+            toast.success(response.msg);
+            loadTeacherList();
+        }
+    });
+}
+function deleteTeacher(userId){
+    var ok = confirm("Are you want to delete this teacher");
+    if(!ok)return;
+    var data = {
+        'user_id': userId
+    };
+    $.get(url.get(1)+"/delete", app.setToken(data), function(response) {
+        console.log(response);
+        if(response.error == 1){
+             toast.danger(response.errorMsg);
         }
         else{
             toast.success(response.msg);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Notification;
 
 use App\Http\Controllers\Controller;
-use App\NotificationQueue;
+use App\Models\NotificationQueue;
 use Validator;
 
 class NotificationController extends Controller

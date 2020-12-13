@@ -45,16 +45,22 @@ var url = {
         if (url) this.set('', '', url);
         $("#topLoader").show();
         var data = {
-            'load_content': 0
+            'load_content': 0,
+            'json': 1
         };
         $.get(this.get(), data, function(response) {
             document.title = $(response).filter('title').text();
             $("#topLoader").hide(100);
             $("#body").html(response);
         }).fail(function(error) {
-            $("#topLoader").hide(100);
-            toast.danger(error.responseJSON.error);
-            parent.history.back();
+            if (error.status == 500) {
+                alert("Error Found\n------\n" + error.responseJSON.error);
+                window.location.href = error.responseJSON.debugUrl;
+            } else {
+                $("#topLoader").hide(100);
+                toast.danger(error.responseJSON.error);
+                parent.history.back();
+            }
         });
     }
 };

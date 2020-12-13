@@ -54,20 +54,22 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        //dd($exception);
+        //dd($exception->getMessage());
         if ($this->isHttpException($exception)) {
-            if (!Layout::isLayout()) {
+            if (Layout::json()) {
                 return response()->json([
-                    'error' => $exception->getStatusCode() . " Error",
-                ],$exception->getStatusCode());
+                    'error' => $exception->getMessage() == "" ? "Error Found" : $exception->getMessage(),
+                ], $exception->getStatusCode());
             }
         }
-        else{
-            if(!Layout::debugPage()){
+        if ($exception instanceof ValidationException) {
+
+        } else {
+            if (Layout::json()) {
                 return response()->json([
-                    'error' => 1,
-                    'debug' => \Request::getPathInfo()."?debug=1"
-                ]);
+                    'error'    => $exception->getMessage(),
+                    'debugUrl' => Layout::requestLayoutDebugUrl(),
+                ], 500);
             }
         }
 

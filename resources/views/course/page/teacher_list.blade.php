@@ -2,20 +2,7 @@
 @section('title', 'Teachers in '.$courseData->name)
 
 	<style type="text/css">
-		.course .header{
-			font-size: 14px;
-			border: 2px solid #eeeeee;
-			height: 55px;
-			padding-top: 16px;
-			border-width: 0px 0px 1px 0px;
-			margin-left: 2px;
-			overflow-x: auto;
-			position: -webkit-sticky;position: sticky;
-  			top: 0;
-  			background-color: #ffffff;
-  			z-index: 999;
-  			box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
-		}
+		
 		.course .body{
 			padding: 10px;
 		}
@@ -90,15 +77,14 @@
               </tr>
             </thead>
             <tbody>
-            <?php $teachers = $courseData->teachers()->get(); ?>
+            <?php $teachers = $courseData->teachers()->get();  ?>
             @foreach ($teachers as $key => $teacher)
             	<tr>
             		<td style="width: 15%"><img src="http://127.0.0.1:8000/upload/avatars/default_avatar.png" class="listImg"></td>
             		<td style="width: 50%;padding-top: 20px">{{$teacher->full_name}}</td>
             		<td style="width: 20%;padding-top: 20px">{{$teacher->pivot->role}}</td>
             		<td style="width: 15%;padding-top: 20px">
-            			<button class="btn-sm">btn</button>
-            			<button class="btn-sm btn-success">btn</button>
+            			<button class="btn-sm" onclick="deleteTeacher({{$teacher->id}})">Delete</button>
             		</td>
             	</tr>  
             @endforeach

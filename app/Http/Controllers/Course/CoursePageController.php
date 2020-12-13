@@ -9,11 +9,6 @@ use App\Http\Controllers\Layout\LayoutController as Layout;
 
 class CoursePageController extends Controller
 {
-    public function __construct($foo = null)
-    {
-        return view('course.create_course');
-        //exit;
-    }
     public function mergeDefaultData()
     {
         $courseData = Course::where('id', request()->course_id)->get()->first();
@@ -25,9 +20,12 @@ class CoursePageController extends Controller
     {
         return view('course.create_course');
     }
+    public function setting(){
+        return Layout::view("course.page.setting", $this->mergeDefaultData());
+    }
     public function viewCourseList()
     {
-        $courseList = Course::all();
+        $courseList = auth()->user()->courses()->get();
         return Layout::view("course.course_list", [
             'courseList' => $courseList,
         ]);

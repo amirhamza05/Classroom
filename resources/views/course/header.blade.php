@@ -1,4 +1,17 @@
 <style type="text/css">
+	.course .header{
+			font-size: 14px;
+			border-bottom: 1px solid #eeeeee;
+			height: 55px;
+			padding-top: 16px;
+			margin-left: 0px;
+			overflow-x: auto;
+			position: -webkit-sticky;position: sticky;
+  			top: 0;
+  			background-color: #ffffff;
+  			z-index: 999;
+  			box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+		}
 	.course a{
 		text-align: center;
 		padding: 15px 20px 15px 20px;
@@ -14,25 +27,58 @@
 		font-size: 18px;
 
 	}
+	.box{
+		background-color: #ffffff;
+		padding: 10px;
+		border-radius: 5px;
+		border: 1px solid #E1E4E8;
+		margin-bottom: 10px;
+	}
+	.courseBody{
+		padding: 20px;
+	}
 </style>
- 
- <script type="text/javascript">
- 	var _courseId = {{$courseData->id}};
- 	//var _url = "{{Request::url()}}";
- </script>
-
+@php
+    $userType = strtolower(Auth::user()->user_type);
+    $courseId = $courseData['id'];
+    $urlPrefix = $userType.'/courses/'.$courseId.'';
+    $courseHeader = [
+        '' => [
+            'icon'  => 'fas fa-home',
+            'title' => 'Stream'
+        ],
+        '/teachers' => [
+            'icon'  => 'fas fa-chalkboard-teacher',
+            'title' => 'Teachers'
+        ],
+        '/students' => [
+            'icon'  => 'fas fa-calendar-alt',
+            'title' => 'Student'
+        ],
+        '/schedule' => [
+            'icon'  => 'fas fa-user',
+            'title' => 'Schedule'
+        ],
+        '/grade' => [
+            'icon'  => 'fas fa-sign-out-alt',
+            'title' => 'Grade'
+        ],
+        '/setting' => [
+            'icon'  => 'fas fa-sign-out-alt',
+            'title' => 'Setting'
+        ],
+    ];
+@endphp
 <div class="header">
 		<div class="row">
 			<div class="pull-left">
 				<a href="{{url('/teacher/courses/'.$courseData['id'])}}" class="title">{{$courseData->name(30)}}</a>
 			</div>
 			<center>
-				<a href="{{url('/teacher/courses/'.$courseData['id'])}}" class="active"><span class="fas fa-chalkboard-teacher"></span> Stream</a>
-				<a href="{{url('/teacher/courses/'.$courseData['id'].'/teachers')}}"><span class="fas fa-chalkboard-teacher"></span> Teacher</a>
-				<a href="{{url('/teacher/course/'.$courseData['id'])}}"><span class="fas fa-chalkboard-teacher"></span> Student</a>
-				<a href="{{url('/teacher/course/'.$courseData['id'])}}"><span class="fas fa-chalkboard-teacher"></span> Schedule</a>
-				<a href="{{url('/teacher/course/'.$courseData['id'])}}"><span class="fas fa-chalkboard-teacher"></span> Grade</a>
-				<a href="{{url('/teacher/course/'.$courseData['id'])}}"><span class="fas fa-chalkboard-teacher"></span> Setting</a>
+				@foreach($courseHeader as $key => $value)
+               	<a href="{{url($urlPrefix.$key)}}" class="{{ request()->is($urlPrefix.$key) ? 'active' : '' }}"><span class="{{$value['icon']}}"></span> {{$value['title']}}</a>
+            	@endforeach
+				
 			</center>
 		</div>
 		 

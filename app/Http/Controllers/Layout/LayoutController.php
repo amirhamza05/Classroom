@@ -14,6 +14,9 @@ class LayoutController extends Controller
         }
         return 1;
     }
+    public static function json(){
+        return isset(request()->json) ? 1 : 0;
+    }
     public static function debugPage()
     {
         return isset(request()->debug) ? 1 : 0;
@@ -22,6 +25,13 @@ class LayoutController extends Controller
     {
         return self::isLayout() ? "layout" : 'body_layout';
     }
+
+    public static function requestLayoutDebugUrl(){
+        $request = request();
+        $request->query->remove('json');
+        return $request->fullUrlWithQuery([]);
+    }
+
     public static function compressLayoutHtml($html)
     {
         $html = str_replace("\n", "", $html);
@@ -33,22 +43,17 @@ class LayoutController extends Controller
 
     public static function view($page, $data = [])
     {
+        
         if (isset(request()->preload_sidebar)) {
             $page = "includes.sidebar";
-            //sleep(10);
         } else if (isset(request()->load_content)) {
             $page = $page;
-            //sleep(5);
         } else {
             $page = "preload_layout";
         }
 
         if ($page == "preload_layout") {
             return self::compressLayoutHtml(view($page, $data)->render());
-        }
-
-        if (self::debugPage()) {
-            return view($page, $data);
         }
 
         return view($page, $data);

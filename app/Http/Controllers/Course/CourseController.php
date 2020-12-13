@@ -20,9 +20,9 @@ class CourseController extends Controller
             'msg' => "Successfully added new course"
         ]);
     }
-    public function update()
+    public function update(CourseCreate $request)
     {
-
+        $courseData = Course::create($request->all());
     }
     public function delete()
     {
@@ -32,13 +32,20 @@ class CourseController extends Controller
             'msg'   => "Successfully delete course",
         ]);
     }
-
     public function addTeacher(TeacherAdd $request)
     {
         Course::find(request()->course_id)->teachers()->attach(request()->user_id);
         return response()->json([
             'error' => 0,
             'msg'   => "Successfully added teacher",
+        ]);
+    }
+
+    public function deleteTeacher(){
+         Course::find(request()->course_id)->teachers()->detach(request()->user_id);
+         return response()->json([
+            'error' => 0,
+            'msg'   => "Successfully deleted teacher",
         ]);
     }
 

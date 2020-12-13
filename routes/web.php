@@ -49,9 +49,13 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
     Route::group(['prefix' => 'courses/{course_id}','middleware' => ['course']], function(){
         Route::get('/', 'Course\CoursePageController@viewDashboard');
         Route::get('/dashboard', 'Course\CoursePageController@viewDashboard');
+        Route::get('/setting', 'Course\CoursePageController@setting');
+        
         Route::get('/teachers', 'Course\CoursePageController@viewTeacherList'); 
-        Route::post('/teachers/create', 'Course\CourseController@addTeacher');
-        Route::post('/delete', 'Course\CourseController@delete');
+        Route::get('/teachers/create', 'Course\CourseController@addTeacher');
+        Route::get('/teachers/delete', 'Course\CourseController@deleteTeacher');
+
+        Route::post('setting/delete', 'Course\CourseController@delete');
     });
 
     //post

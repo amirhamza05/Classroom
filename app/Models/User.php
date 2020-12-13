@@ -40,4 +40,9 @@ class User extends Authenticatable
         return $this->user_type == "Student" ? 1 : 0;
     }
 
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_teachers', 'user_id','course_id')->withPivot(['role']);
+    }
+
 }
