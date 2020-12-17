@@ -24,7 +24,9 @@
 
 <div class="course">
 	@include("course.header")
+
 	<div class="courseBody">
+		@if($courseData->isAdmin())
 		<div class="box">
 			<form action="" id="create_course" method="post">
 	@csrf
@@ -62,12 +64,23 @@
 </div>
 
 </div>
+
 </form>
 		</div>
-		<div class="box">
-			<div class="pull-right"><button onclick="deleteCourse()"><i class="far fa-trash-alt"></i> Delete Course</button></div>
-			<b>Delete this Course</b><br/>
-			Once you delete a course, there is no going back. Please be certain.
+@endif
+		<div class="box" style="border: 1px solid red">
+			<div style="border-bottom: 1px solid #eeeeee;padding-bottom: 15px;margin-bottom: 15px;">
+				<div class="pull-right"><button onclick="leaveCourse()"><i class="fa fa-sign-out"></i> Leave Course</button></div>
+				<b>Leave this Course</b><br/>
+				Once you delete a course, there is no going back. Please be certain.
+			</div>
+			@if($courseData->isAdmin())
+			<div>
+				<div class="pull-right"><button onclick="deleteCourse()"><i class="far fa-trash-alt"></i> Delete Course</button></div>
+				<b>Delete this Course</b><br/>
+				Once you delete a course, there is no going back. Please be certain.
+			</div>
+			@endif
 		</div>
 	</div>
 </div>

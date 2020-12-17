@@ -49,7 +49,7 @@ $(document).ready(function() {
     }
 
     function checkError(responseError) {
-        alert("Error Found\n------\n" + responseError.responseJSON.error);
+        alert("Error Found\n------\n" + responseError.responseJSON.message);
         window.location.href = responseError.responseJSON.debugUrl;
     }
 

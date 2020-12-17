@@ -38,4 +38,7 @@ class CoursePageController extends Controller
     {
         return Layout::view("course.dashboard", $this->mergeDefaultData());
     }
+    public function viewAddTeacher(){
+        return view('course.page.add_teacher');
+    }
 }

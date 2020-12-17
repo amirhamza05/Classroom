@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 #guest user login option
 
 Route::get('/', "Home\home@home");
-Route::get('/modal', function(){
+Route::get('/modal', function () {
     return view('includes.modal');
 });
 //guest group
@@ -40,22 +40,28 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
 
     //profile
     Route::get('/profile', 'User\LoginUserController@getProfile');
+    Route::get('/api/teacher_list', 'Course\CourseController@teacherList');
 
-    //---course 
+    //---course
     //get
     Route::get('/courses', 'Course\CoursePageController@viewCourseList');
     Route::get('/courses/create', 'Course\CoursePageController@createCourse');
 
-    Route::group(['prefix' => 'courses/{course_id}','middleware' => ['course']], function(){
+    Route::group(['prefix' => 'courses/{course_id}', 'middleware' => ['course']], function () {
+
         Route::get('/', 'Course\CoursePageController@viewDashboard');
         Route::get('/dashboard', 'Course\CoursePageController@viewDashboard');
+        Route::get('/teachers', 'Course\CoursePageController@viewTeacherList');
         Route::get('/setting', 'Course\CoursePageController@setting');
-        
-        Route::get('/teachers', 'Course\CoursePageController@viewTeacherList'); 
-        Route::get('/teachers/create', 'Course\CourseController@addTeacher');
-        Route::get('/teachers/delete', 'Course\CourseController@deleteTeacher');
-
-        Route::post('setting/delete', 'Course\CourseController@delete');
+        Route::get('/setting/leave', 'Course\CourseController@leave');
+        //course admin area
+        Route::group(['middleware' => ['course.admin']], function () {
+            
+            Route::post('/teachers/create', 'Course\CourseController@addTeacher');
+            Route::get('/teachers/create', 'Course\CoursePageController@viewAddTeacher');
+            Route::get('/teachers/delete', 'Course\CourseController@deleteTeacher');
+            Route::get('setting/delete', 'Course\CourseController@delete');
+        });
     });
 
     //post
@@ -65,7 +71,7 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
 
     Route::get('/routine', 'User\LoginUserController@getProfile');
 
-    Route::get('/update_profile', function(){
+    Route::get('/update_profile', function () {
         return view('user.update_profile');
     });
 });

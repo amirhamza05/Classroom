@@ -47,6 +47,14 @@ class Course extends Model
         return substr($this->name, 0, $len) . (strlen($this->name) > $len ? "..." : "");
     }
 
+    public function isAdmin()
+    {
+        return $this->teachers()->where(['id' => auth()->user()->id, 'role' => 'admin'])->exists();
+    }
+    public function isModerator()
+    {
+        return $this->teachers()->where(['id' => auth()->user()->id, 'role' => 'moderator'])->exists();
+    }
     public function teachers()
     {
         return $this->belongsToMany(User::class, 'course_teachers', 'course_id', 'user_id')->withPivot(['role']);

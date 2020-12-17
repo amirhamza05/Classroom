@@ -59,7 +59,10 @@
       				
       		<div class="pull-left title">Teachers</div>
       		<div class="pull-right">
-        		<button onclick="addTeacher('{{$courseData->id}}')">Add Teacher</button>
+      			@if($courseData->isAdmin())
+        		<button onclick="addTeacher()">Add Teacher</button>
+        		<button onclick="viewAddTeacher()">Add Multi Teacher</button>
+        		@endif
         	</div>
 
       		</div>	
@@ -73,7 +76,10 @@
                 <th>Photo</th>
                 <th>Name</th>
                 <th>Role</th>
+                @if($courseData->isAdmin())
                 <th>Action</th>
+            	@endif
+
               </tr>
             </thead>
             <tbody>
@@ -83,9 +89,11 @@
             		<td style="width: 15%"><img src="http://127.0.0.1:8000/upload/avatars/default_avatar.png" class="listImg"></td>
             		<td style="width: 50%;padding-top: 20px">{{$teacher->full_name}}</td>
             		<td style="width: 20%;padding-top: 20px">{{$teacher->pivot->role}}</td>
+            		@if($courseData->isAdmin())
             		<td style="width: 15%;padding-top: 20px">
             			<button class="btn-sm" onclick="deleteTeacher({{$teacher->id}})">Delete</button>
             		</td>
+            		@endif
             	</tr>  
             @endforeach
              
@@ -94,11 +102,7 @@
           
         </div>
       </div>
-    </div>
-
-
+    </div>	
 			
-			
-		</div>
-		
 	</div>
+</div>

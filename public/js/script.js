@@ -54,16 +54,22 @@ var url = {
             $("#body").html(response);
         }).fail(function(error) {
             if (error.status == 500) {
-                alert("Error Found\n------\n" + error.responseJSON.error);
+                alert("Error Found\n------\n" + error.responseJSON.message);
                 window.location.href = error.responseJSON.debugUrl;
             } else {
                 $("#topLoader").hide(100);
-                toast.danger(error.responseJSON.error);
+                toast.danger(error.responseJSON.message);
                 parent.history.back();
             }
         });
     }
 };
+//
+var failError = {
+    toast: function(error) {
+        toast.danger(error.responseJSON.message);
+    }
+}
 //start button
 var btn = {
     off: function(btnId, txt) {

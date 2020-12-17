@@ -130,7 +130,6 @@
         </div>
       </div>
     </div>
-     
     <div class="col-lg-3 col-sm-6">
       <div class="circle-tile ">
         <a href="#"><div class="circle-tile-heading red"><i class="fa fa-users fa-fw fa-3x"></i></div></a>

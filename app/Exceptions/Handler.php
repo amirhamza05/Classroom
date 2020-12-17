@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
         if ($this->isHttpException($exception)) {
             if (Layout::json()) {
                 return response()->json([
-                    'error' => $exception->getMessage() == "" ? "Error Found" : $exception->getMessage(),
+                    'message' => $exception->getMessage() == "" ? $exception->getStatusCode()." Error Found" : $exception->getMessage(),
                 ], $exception->getStatusCode());
             }
         }
@@ -67,7 +67,7 @@ class Handler extends ExceptionHandler
         } else {
             if (Layout::json()) {
                 return response()->json([
-                    'error'    => $exception->getMessage(),
+                    'message'    => $exception->getMessage(),
                     'debugUrl' => Layout::requestLayoutDebugUrl(),
                 ], 500);
             }
