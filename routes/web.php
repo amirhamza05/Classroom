@@ -54,6 +54,14 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
         Route::get('/teachers', 'Course\CoursePageController@viewTeacherList');
         Route::get('/setting', 'Course\CoursePageController@setting');
         Route::get('/setting/leave', 'Course\CourseController@leave');
+        
+         //tani post comment
+        Route::post('/comment', 'Course\CommentController@create');
+        Route::get('/comment/{comment_id}/update', 'Course\CommentController@updatePage');
+        Route::post('/comment/{comment_id}/update', 'Course\CommentController@update');
+        Route::get('/comment/{comment_id}/delete', 'Course\CommentController@delete');
+        Route::post('/comment/{comment_id}/comment-reply', 'Course\CommentReplyController@create');
+        
         //course admin area
         Route::group(['middleware' => ['course.admin']], function () {
             
@@ -62,6 +70,9 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
             Route::get('/teachers/delete', 'Course\CourseController@deleteTeacher');
             Route::get('setting/delete', 'Course\CourseController@delete');
         });
+        
+       
+
     });
 
     //post
