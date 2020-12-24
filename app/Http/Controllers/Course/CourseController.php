@@ -42,11 +42,24 @@ class CourseController extends Controller
             'msg'   => "Successfully added teacher",
         ]);
     }
+    public function confirmRequest(){
+        Course::find(request()->course_id)->teachers()->updateExistingPivot(auth()->user()->id, array('status' => 'accept'), false);
+    }
     public function leave(){
         Course::find(request()->course_id)->teachers()->detach(auth()->user()->id);
         return response()->json([
             'error' => 0,
             'msg'   => "Successfully leave you in this course",
+        ]);
+    }
+
+    public function updateArchive(){
+        $isArchive = request()->is_archive;
+        Course::find(request()->course_id)->update(['is_archive'=>$isArchive]);
+        $msg = $isArchive?"add archive":"add current";
+        return response()->json([
+            'error' => 0,
+            'msg'   => "Successfully $msg this course",
         ]);
     }
 

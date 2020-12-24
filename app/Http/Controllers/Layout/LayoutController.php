@@ -34,10 +34,10 @@ class LayoutController extends Controller
 
     public static function compressLayoutHtml($html)
     {
-        $html = str_replace("\n", "", $html);
+        //$html = str_replace("\n", "", $html);
         $html = str_replace("\r", "", $html);
-        $html = str_replace("\t", "", $html);
-        $html = str_replace("  ", "", $html);
+        //$html = str_replace("\t", "", $html);
+        //$html = str_replace("  ", "", $html);
         return $html;
     }
 

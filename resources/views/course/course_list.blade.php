@@ -35,7 +35,7 @@
 			color: #95a5a6;
 		}
 		.course-list .normal {
-			color: #7f8c8d;
+			color: #aaaaaa;
 		}
 button {
     background-color: var(--red);
@@ -82,18 +82,19 @@ button:focus {
 }
 .course-list .card{
 	padding: 2px;
-	height: 200px;
+	height: 205px;
 	border: 1px solid #eeeeee;
 	box-shadow: 2px 2px 5px 2px #aaaaaa;
 	margin-bottom: 25px;
 	background-color: #ffffff;
+	overflow: hidden;
 
 }
 .course-list .card:hover{
 	box-shadow: 5px 5px 10px 3px #aaaaaa;	
 }
 .course-list .card img{
-	height: 70px;
+	height: 75px;
 	width: 100%;
 }
 .course-list .card-body{
@@ -101,16 +102,14 @@ button:focus {
 	padding: 3px;
 }
 
-
 	</style>
-	
 
 	<div class="course-list">
 		<div class="header">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="pull-left" style="margin-top: 7px;">
-						<a href=""><span class="active"><i class="fa fa-play"></i> Current</span></a> | <a href=""><span class="normal"><i class="fa fa-clock-o"></i> Archive</span></a>
+						<a href="/teacher/courses"><span class="{{!(isset(request()->request_courses)|isset(request()->archive_course))?'active':'normal'}}"><i class="fa fa-play"></i> Current</span></a> | <a href="/teacher/courses?archive_course=1"><span class="{{isset(request()->archive_course)?'active':'normal'}}"><i class="fa fa-clock-o"></i> Archive</span></a> | <a href="/teacher/courses?request_courses=1"><span class="{{isset(request()->request_courses)?'active':'normal'}}"><i class="fa fa-clock-o"></i> Requset</span></a>
 					</div>
 					<div class="pull-right">
 						<button class="" onclick="loadCreateCourse()"><i class="fa fa-plus"></i> Create Course</button>
@@ -128,16 +127,29 @@ button:focus {
                		<div class="card">
                			<div class="card-header">
                				<img src="{{asset($data->cover)}}">
-               				<div style="margin-top: -60px;padding-left: 5px;color: #ffffff">
+               				<div style="margin-top: -65px;padding-left: 5px;color: #ffffff">
+               					
+
                					<font size="5px;"><b>{{$data->name(16)}}</b></font><br/>
                					<div style="margin-top: -5px;">{{$data->code}}</div>
                				</div>
                			</div>
-               			<div class="card-body" style="margin-top: 15px;">
+               			<div class="card-body" style="margin-top: 20px;">
+               				<center>
+               					@if($data->isTeacher())
+               						@if($data->isAdmin())
+               							<span class="label label-success"><i class="fas fa-user-shield"></i> Admin</span>
+               						@elseif($data->isModerator())
+               							<span class="label label-info"><i class="fas fa-user-cog"></i> Moderator</span>
+               						@endif
+               					@endif
+               				</center>
                				Subject: {{$data->subject}}<br/>
                				Section: {{$data->section}}<br/>
                				Room: {{$data->room}}<br/>
+               				
                			</div>
+               			
                			<div class="card-footer">
                				<a href="{{url('teacher/courses/'.$data->id)}}" page-title='{{$data->name}}' title="View"><button style="width: 100%; background-color: #F2F6F4; color: var(--blue)"><b>View</b></button></a>
                			</div>

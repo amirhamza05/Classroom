@@ -1,6 +1,10 @@
 var teacherAddCartList;
 var teacherData = [];
 
+function getCourseId() {
+    return $('meta[name="course-id"]').attr('content');
+}
+
 function deleteCourse() {
     var ok = confirm("Are you want to delete this course");
     if (!ok) return;
@@ -65,6 +69,34 @@ function addTeacher() {
     });
 }
 
+function acceptRequest() {
+    var ok = confirm("Are you want to join this course");
+    if (!ok) return;
+    courseId = getCourseId();
+    var data = {
+        'course_id': courseId
+    };
+    $.post("/teacher/courses/" + courseId + "/confirm", app.setToken(data), function(response) {
+        toast.success("Successfully Confirm Request");
+        url.load();
+    });
+}
+
+function deleteRequest() {
+    var ok = confirm("Are you want to cancel this request");
+    if (!ok) return;
+    courseId = getCourseId();
+    var data = {
+        'course_id': courseId
+    };
+    $.get("/teacher/courses/" + courseId + "/setting/leave", function(response) {
+        toast.success(response.msg);
+        loadCourseList();
+    }).fail(function(error) {
+        failError.toast(error);
+    });
+}
+
 function deleteTeacher(userId) {
     var ok = confirm("Are you want to delete this teacher");
     if (!ok) return;
@@ -82,6 +114,22 @@ function deleteTeacher(userId) {
     });
 }
 
+function archiveCourseAction(isArchive) {
+    msg = isArchive ? "current" : "archive";
+    msg = "Are you want to add " + msg + " this course";
+    var ok = confirm(msg);
+    if (!ok) return;
+    var data = {
+        'is_archive': isArchive ^ 1
+    };
+    $.post(url.get() + "/archive", app.setToken(data), function(response) {
+        toast.success(response.msg);
+        url.load();
+    }).fail(function(error) {
+        failError.toast(error);
+    });
+}
+
 function teacherAddCart(id) {
     teacherAddCartList[id] = {
         login_id: teacherData[id].login_id,
@@ -89,11 +137,10 @@ function teacherAddCart(id) {
     };
     $("#select-list-area").html("");
     teacherAddCartList.forEach(prepareAddCart);
-
 }
 
 function prepareAddCart(data) {
-    var div = "<span class='label label-primary cart-span'>("+data.login_id+") "+data.full_name+" <i class='fa fa-times'></i></span>";
+    var div = "<span class='label label-primary cart-span'>(" + data.login_id + ") " + data.full_name + " <i class='fa fa-times'></i></span>";
     $("#select-list-area").append(div);
 }
 
@@ -106,7 +153,6 @@ function getTeacherList() {
     var data = {
         'searchVal': searchVal
     }
-
     $("#select-search-area-loader").show();
     $.get("/teacher/api/teacher_list", app.setToken(data), function(list) {
         $("#responseSearch").html("");
