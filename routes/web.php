@@ -55,7 +55,7 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
         Route::get('/setting', 'Course\CoursePageController@setting');
         Route::get('/setting/leave', 'Course\CourseController@leave');
         
-         //tani post comment
+         //post comment
         Route::post('/comment', 'Course\CommentController@create');
         Route::get('/comment/{comment_id}/update', 'Course\CommentController@updatePage');
         Route::post('/comment/{comment_id}/update', 'Course\CommentController@update');
