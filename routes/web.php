@@ -50,18 +50,31 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
     Route::group(['prefix' => 'courses/{course_id}', 'middleware' => ['course']], function () {
 
         Route::get('/', 'Course\CoursePageController@viewDashboard');
+        Route::post('/confirm', 'Course\CourseController@confirmRequest');
         Route::get('/dashboard', 'Course\CoursePageController@viewDashboard');
         Route::get('/teachers', 'Course\CoursePageController@viewTeacherList');
         Route::get('/setting', 'Course\CoursePageController@setting');
         Route::get('/setting/leave', 'Course\CourseController@leave');
+        
+         //post comment
+        Route::post('/comment', 'Course\CommentController@create');
+        Route::get('/comment/{comment_id}/update', 'Course\CommentController@updatePage');
+        Route::post('/comment/{comment_id}/update', 'Course\CommentController@update');
+        Route::get('/comment/{comment_id}/delete', 'Course\CommentController@delete');
+        Route::post('/comment/{comment_id}/comment-reply', 'Course\CommentReplyController@create');
+        
         //course admin area
         Route::group(['middleware' => ['course.admin']], function () {
-            
+
             Route::post('/teachers/create', 'Course\CourseController@addTeacher');
             Route::get('/teachers/create', 'Course\CoursePageController@viewAddTeacher');
             Route::get('/teachers/delete', 'Course\CourseController@deleteTeacher');
-            Route::get('setting/delete', 'Course\CourseController@delete');
+            Route::get('/setting/delete', 'Course\CourseController@delete');
+            Route::post('/setting/archive', 'Course\CourseController@updateArchive');
         });
+        
+       
+
     });
 
     //post

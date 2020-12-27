@@ -55,7 +55,7 @@
 	</div>
 	<div class="col-md-4"></div>
 	<div class="col-md-8">
-		
+
 	</div>
 	<div class="pull-right">
 		<button type="submit" class="btn-success" style="margin-top: 20px;"><i class="fas fa-edit"></i> Update Course Data</button>
@@ -75,6 +75,12 @@
 				Once you delete a course, there is no going back. Please be certain.
 			</div>
 			@if($courseData->isAdmin())
+			<div style="border-bottom: 1px solid #eeeeee;padding-bottom: 15px;margin-bottom: 15px;">
+				<div class="pull-right"><button archive="{{$courseData->is_archive}}" class="{{$courseData->is_archive?'btn-success':''}}" onclick="archiveCourseAction({{$courseData->is_archive}})"><i class="fa fa-sign-out"></i> {{$courseData->is_archive?'Add Current':'Add Archive'}}</button></div>
+				<b>Add {{$courseData->is_archive?"Current this course":"Archive this course"}}</b><br/>
+				{{$courseData->is_archive?"If you select current then you can not see this course in current course":"If you select archive then you can see this course in archive course"}}
+
+			</div>
 			<div>
 				<div class="pull-right"><button onclick="deleteCourse()"><i class="far fa-trash-alt"></i> Delete Course</button></div>
 				<b>Delete this Course</b><br/>

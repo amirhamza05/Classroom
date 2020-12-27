@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCourseTeachersTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateCourseTeachersTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_teachers', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->foreignId('course_id');
             $table->foreignId('user_id');
-            $table->enum('role', ['admin', 'moderator'])->default('moderator');
-            $table->enum('status', ['accept', 'pending'])->default('pending');
-            $table->timestamps();
-
-            //key area
-            $table->primary(['course_id', 'user_id']);
+            $table->text('comment');
+           
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
+            $table->timestamps();
         });
     }
 
@@ -35,6 +32,6 @@ class CreateCourseTeachersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_teachers');
+        Schema::dropIfExists('comments');
     }
 }

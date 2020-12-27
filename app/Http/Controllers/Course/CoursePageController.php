@@ -25,7 +25,10 @@ class CoursePageController extends Controller
     }
     public function viewCourseList()
     {
-        $courseList = auth()->user()->courses()->get();
+        $where = ['status' => 'accept','is_archive' => '0'];
+        if(isset(request()->request_courses))$where = ['status'=> 'pending'];
+        else if(isset(request()->archive_course))$where = ['is_archive' => '1'];
+        $courseList = auth()->user()->courses()->where($where)->get();
         return Layout::view("course.course_list", [
             'courseList' => $courseList,
         ]);

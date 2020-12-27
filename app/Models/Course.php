@@ -55,9 +55,19 @@ class Course extends Model
     {
         return $this->teachers()->where(['id' => auth()->user()->id, 'role' => 'moderator'])->exists();
     }
+    public function isTeacher(){
+        return $this->teachers()->where(['id' => auth()->user()->id])->exists();
+    }
+    public function isAccept(){
+        return $this->teachers()->where(['id' => auth()->user()->id,'status'=>'accept'])->exists();
+    }
     public function teachers()
     {
         return $this->belongsToMany(User::class, 'course_teachers', 'course_id', 'user_id')->withPivot(['role']);
+    }
+
+    public function discussions(){
+        //return $this->hashMany()''
     }
 
 }
