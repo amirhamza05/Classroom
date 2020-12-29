@@ -39,6 +39,8 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
     Route::get('/logout', 'Auth\LoginController@logout');
 
     //profile
+    
+    //test
     Route::get('/profile', 'User\LoginUserController@getProfile');
     Route::get('/api/teacher_list', 'Course\CourseController@teacherList');
 
