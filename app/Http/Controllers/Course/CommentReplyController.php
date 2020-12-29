@@ -20,13 +20,36 @@ class CommentReplyController extends Controller
 
     }
     
-    public function delete()
+    public function deletePage()
     {
-        CommentReply::find(request()->comment_id)->delete();
+       // dd($request->all());
+        CommentReply::find(request()->comment_reply_id)->delete();
         return response()->json([
             'error' => 0,
             'msg'   => "Successfully delete comment",
         ]);
     } 
+    public function update(CommentReplyValidation $request)
+    {
+        CommentReply::find(request()->comment_reply_id)->update($request->all());
+
+        // $comment = Comment::where('id', $r)->update$request->all());
+        return response()->json([
+        'error'     => 0,
+        'msg' => "Successfully edited comment"
+    ]);
+       
+    } 
+    public function updatePage()
+    {
+        // dd(request()->all());
+        $commentReplyData = CommentReply::where(['id'=>request()->comment_reply_id])->first();
+       // dd(request()->all());
+        // return view('/updateComment',[$commentData]);
+        return view("course.page.updateCommentReply", [
+            'commentReplyData' => $commentReplyData,
+        ]);
+    }
+
 
 }

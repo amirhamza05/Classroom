@@ -16,7 +16,7 @@ class CommentController extends Controller
        Comment::create($request->all());   
        return response()->json([
         'error'     => 0,
-        'msg' => "Successfully added comment"
+        'msg' => "Successfully add comment"
     ]);
 
     }
@@ -36,7 +36,7 @@ class CommentController extends Controller
         // $comment = Comment::where('id', $r)->update$request->all());
         return response()->json([
         'error'     => 0,
-        'msg' => "Successfully added comment"
+        'msg' => "Successfully edited comment"
     ]);
        
     } 
