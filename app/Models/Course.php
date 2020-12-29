@@ -27,6 +27,7 @@ class Course extends Model
         static::created(function ($course) {
             $course->teachers()->attach(Auth::user()->id, [
                 'role' => 'admin',
+                'status'=> 'accept',
             ]);
         });
     }
@@ -65,7 +66,10 @@ class Course extends Model
     {
         return $this->belongsToMany(User::class, 'course_teachers', 'course_id', 'user_id')->withPivot(['role']);
     }
-
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
     public function discussions(){
         //return $this->hashMany()''
     }

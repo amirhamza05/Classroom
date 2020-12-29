@@ -235,7 +235,7 @@
             </ul>
          </div>
          @endif
-             <form method="post" action=" {{url('teacher/courses/'.$courseData->id.'/comment')}} ">                
+             <form id="add_discussion" method="post" action=" {{url('teacher/courses/'.$courseData->id.'/comment')}} ">                
 			 @csrf
 			 <div class="form-group">
 	
@@ -246,6 +246,21 @@
 	       <button class="btn btn-danger">Post</button>
 	       </div>
     </form>
+	<script type="text/javascript">
+	$(document).ready(function(){
+  		$("#add_discussion").submit(function(event){
+    		event.preventDefault(); //prevent default action
+    		var formData = $(this).serializeArray();
+    		$.post("{{url('teacher/courses/'.$courseData->id.'/comment')}}" , formData, function(response) {
+        		toast.success(response.msg);
+        		url.load();
+
+    		}).fail(function(error) {
+        		failError.toast(error.msg);
+    		});
+  		});
+	});
+	</script>
     </div>
    </div>
 <!-- comment/post send section end-->
@@ -316,13 +331,13 @@
    <div style="float:right;" class='reply-delete-update'>
 
    @if(Auth::user()->id == $reply->user->id) 
-  <a href="{{url('teacher/courses/'.$courseData->id.'/comment/'.$comment->id.'/update')}}">
+   <a href="{{url('teacher/courses/'.$courseData->id.'/comment-reply/'.$reply->id.'/update')}}">
    
   <li style="font-size:1.0em;"  class="fas fa-edit"></li></a>
   @endif 
    <!-- update -->
    @if(Auth::user()->id == $reply->user->id || $courseData->isAdmin()) 
-   <a href="{{url('teacher/courses/'.$courseData->id.'/comment/'.$comment->id.'/delete')}}">
+   <a href="{{url('teacher/courses/'.$courseData->id.'/comment_reply/'.$reply->id.'/delete')}}">
   
    <li style="font-size:1.0em;"  class="fas fa-trash"></li></a>
    

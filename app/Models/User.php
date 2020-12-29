@@ -57,5 +57,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Course::class, 'course_teachers', 'user_id','course_id')->withPivot(['role']);
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    public function replies(){
+        return $this->hasMany(CommentReply::class );
+    }
 
 }
