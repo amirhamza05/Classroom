@@ -20,7 +20,7 @@ class CommentReplyController extends Controller
 
     }
     
-    public function deletePage(Request $request)
+    public function deletePage()
     {
        // dd($request->all());
         CommentReply::find(request()->comment_reply_id)->delete();
