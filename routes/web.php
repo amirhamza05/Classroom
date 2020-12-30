@@ -62,9 +62,8 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
          Route::get('/comment/{comment_id}/update', 'Course\CommentController@updatePage');
          Route::post('/comment/{comment_id}/update', 'Course\CommentController@update');
          Route::get('/comment/{comment_id}/delete', 'Course\CommentController@delete');
-        
-         
          Route::post('/comment/{comment_id}/comment-reply', 'Course\CommentReplyController@create');
+        
          Route::get('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@updatePage');
          Route::post('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@update');
          Route::get('/comment_reply/{comment_reply_id}/delete', 'Course\CommentReplyController@deletePage');
