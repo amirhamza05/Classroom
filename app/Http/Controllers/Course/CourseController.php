@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Course;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Course\CourseCreate;
 use App\Http\Requests\Course\TeacherAdd;
+use App\Http\Requests\Course\StudentAdd;
 //custom controllers
 use App\Models\Course;
 use Illuminate\Http\Request;
@@ -42,6 +43,14 @@ class CourseController extends Controller
             'msg'   => "Successfully added teacher",
         ]);
     }
+    public function addStudent(StudentAdd $request)
+    {   
+        Course::find(request()->course_id)->students()->attach(request()->user_id);
+        return response()->json([
+            'error' => 0,
+            'msg'   => "Successfully added student",
+        ]);
+    }
     public function confirmRequest(){
         Course::find(request()->course_id)->teachers()->updateExistingPivot(auth()->user()->id, array('status' => 'accept'), false);
     }
@@ -74,7 +83,7 @@ class CourseController extends Controller
          Course::find(request()->course_id)->students()->detach(request()->user_id);
          return response()->json([
             'error' => 0,
-            'msg'   => "Successfully deleted teacher",
+            'msg'   => "Successfully deleted student",
         ]);
     }
     public function teacherList(){

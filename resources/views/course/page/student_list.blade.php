@@ -60,8 +60,7 @@
       		<div class="pull-left title">Teachers</div>
       		<div class="pull-right">
       			@if($courseData->isAdmin())
-        		<button onclick="addTeacher()">Add Teacher</button>
-        		<button onclick="viewAddTeacher()">Add Multi Teacher</button>
+        		<button onclick="addStudent()">Add Student</button>
         		@endif
         	</div>
 
