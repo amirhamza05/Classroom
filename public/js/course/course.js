@@ -35,6 +35,14 @@ function loadCreateCourse() {
     });
 }
 
+function loadJoinCourse() {
+    modal.md.open("Join Course");
+    loader(modal.md.body);
+    $.get(url.get(1) + "/join", function(response) {
+        modal.md.setBody(response);
+    });
+}
+
 function loadCourseList() {
     url.load('/teacher/courses');
 }

@@ -109,11 +109,19 @@ button:focus {
 			<div class="row">
 				<div class="col-md-12">
 					<div class="pull-left" style="margin-top: 7px;">
-						<a href="/teacher/courses"><span class="{{!(isset(request()->request_courses)|isset(request()->archive_course))?'active':'normal'}}"><i class="fa fa-play"></i> Current</span></a> | <a href="/teacher/courses?archive_course=1"><span class="{{isset(request()->archive_course)?'active':'normal'}}"><i class="fa fa-clock-o"></i> Archive</span></a> | <a href="/teacher/courses?request_courses=1"><span class="{{isset(request()->request_courses)?'active':'normal'}}"><i class="fa fa-clock-o"></i> Requset</span></a>
+						<a href="/{{$userType}}/courses"><span class="{{!(isset(request()->request_courses)|isset(request()->archive_course))?'active':'normal'}}"><i class="fa fa-play"></i> Current</span></a> | <a href="/{{$userType}}/courses?archive_course=1"><span class="{{isset(request()->archive_course)?'active':'normal'}}"><i class="fa fa-clock-o"></i> Archive</span></a> | <a href="/{{$userType}}/courses?request_courses=1"><span class="{{isset(request()->request_courses)?'active':'normal'}}"><i class="fa fa-clock-o"></i> Requset</span></a>
 					</div>
+					@if($userType  == 'teacher')
 					<div class="pull-right">
 						<button class="" onclick="loadCreateCourse()"><i class="fa fa-plus"></i> Create Course</button>
 					</div>
+					@endif
+					@if($userType  == 'student')
+					<div class="pull-right">
+					<a href="{{url($userType.'/courses/join')}}">
+						<button class="" ><i class="fa fa-plus"></i> Join Course</button></a>
+					</div>
+					@endif
 				</div>
 			</div>
 		</div>
@@ -151,7 +159,7 @@ button:focus {
                			</div>
                			
                			<div class="card-footer">
-               				<a href="{{url('teacher/courses/'.$data->id)}}" page-title='{{$data->name}}' title="View"><button style="width: 100%; background-color: #F2F6F4; color: var(--blue)"><b>View</b></button></a>
+               				<a href="{{url($userType.'/courses/'.$data->id)}}" page-title='{{$data->name}}' title="View"><button style="width: 100%; background-color: #F2F6F4; color: var(--blue)"><b>View</b></button></a>
                			</div>
                		</div>
                </div>

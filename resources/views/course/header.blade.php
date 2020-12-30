@@ -42,6 +42,7 @@
     $userType = strtolower(Auth::user()->user_type);
     $courseId = $courseData['id'];
     $urlPrefix = $userType.'/courses/'.$courseId.'';
+
     $courseHeader = [
         '' => [
             'icon'  => 'fas fa-home',
@@ -59,10 +60,12 @@
             'icon'  => 'fas fa-user',
             'title' => 'Schedule'
         ],
+		
         '/grade' => [
             'icon'  => 'fas fa-sign-out-alt',
             'title' => 'Grade'
         ],
+		
         '/setting' => [
             'icon'  => 'fas fa-sign-out-alt',
             'title' => 'Setting'
@@ -72,13 +75,20 @@
 <div class="header">
 		<div class="row">
 			<div class="pull-left">
-				<a href="{{url('/teacher/courses/'.$courseData['id'])}}" class="title">{{$courseData->name(30)}}</a>
+				<a href="{{url($userType.'/courses/'.$courseData['id'])}}" class="title">{{$courseData->name(30)}}</a>
 			</div>
 			<center>
+			@if(Auth::user()->user_type != 'Student')
 				@foreach($courseHeader as $key => $value)
                	<a href="{{url($urlPrefix.$key)}}" class="{{ request()->is($urlPrefix.$key) ? 'active' : '' }}"><span class="{{$value['icon']}}"></span> {{$value['title']}}</a>
             	@endforeach
-				
+			
+			@else
+				@unset($courseHeader['/grade'])
+			    @foreach($courseHeader as $key => $value )
+               	<a href="{{url($urlPrefix.$key)}}" class="{{ request()->is($urlPrefix.$key) ? 'active' : '' }}"><span class="{{$value['icon']}}"></span> {{$value['title']}}</a>
+				@endforeach
+			@endif
 			</center>
 		</div>
 		 

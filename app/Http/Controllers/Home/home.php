@@ -23,7 +23,9 @@ class home extends Controller
         if (!Auth::check()) {
             return redirect('/');
         }
-        echo "<center><h1>welcome student dashboard <a href='/logout'>Logout</a></h1></center>";
+        // echo "<center><h1>welcome student dashboard <a href='/logout'>Logout</a></h1></center>";
+       $courseList = auth()->user()->courses()->where(['status'=>'pending'])->get();
+        return Layout::view("teacher.dashboard",['pendingCourseList'=>$courseList]);
     }
 
     public function teacherDashboard(Request $request){

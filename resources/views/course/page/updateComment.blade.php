@@ -1,4 +1,4 @@
-<form method="post" action="{{url('teacher/courses/'.$commentData->course_id.'/comment/'.$commentData->id.'/update',)}} ">                
+<form method="post" action="{{url($userType.'/courses/'.$commentData->course_id.'/comment/'.$commentData->id.'/update')}} ">                
      @csrf
 		<div class="form-group">
 	   <textarea name="comment" rows="3" class="text-area-messge form-control"
