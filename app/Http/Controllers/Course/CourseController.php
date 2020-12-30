@@ -74,7 +74,7 @@ class CourseController extends Controller
          Course::find(request()->course_id)->students()->detach(request()->user_id);
          return response()->json([
             'error' => 0,
-            'msg'   => "Successfully deleted teacher",
+            'msg'   => "Successfully deleted student",
         ]);
     }
     public function teacherList(){
