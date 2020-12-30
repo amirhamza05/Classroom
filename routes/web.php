@@ -53,6 +53,7 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
         Route::post('/confirm', 'Course\CourseController@confirmRequest');
         Route::get('/dashboard', 'Course\CoursePageController@viewDashboard');
         Route::get('/teachers', 'Course\CoursePageController@viewTeacherList');
+        Route::get('/students', 'Course\CoursePageController@viewStudentList');
         Route::get('/setting', 'Course\CoursePageController@setting');
         Route::get('/setting/leave', 'Course\CourseController@leave');
         

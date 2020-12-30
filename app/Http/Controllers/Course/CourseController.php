@@ -70,6 +70,13 @@ class CourseController extends Controller
             'msg'   => "Successfully deleted teacher",
         ]);
     }
+    public function deleteStudent(){
+         Course::find(request()->course_id)->students()->detach(request()->user_id);
+         return response()->json([
+            'error' => 0,
+            'msg'   => "Successfully deleted teacher",
+        ]);
+    }
     public function teacherList(){
         //dd(request()->query);
        
