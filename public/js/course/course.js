@@ -43,6 +43,10 @@ function loadTeacherList() {
     url.load(url.get());
 }
 
+function loadStudentList() {
+    url.load(url.get());
+}
+
 function viewAddTeacher() {
     teacherAddCartList = [];
     modal.md.open("Add Teacher");
@@ -65,6 +69,23 @@ function addTeacher() {
         } else {
             toast.success(response.msg);
             loadTeacherList();
+        }
+    });
+}
+
+function addStudent() {
+    var userId = prompt("prompt", "User Id");
+    if (!userId) return;
+    var data = {
+        'user_id': userId,
+    };
+    $.get(url.get(1) + "/create", app.setToken(data), function(response) {
+        console.log(response);
+        if (response.error == 1) {
+            toast.danger(response.errorMsg);
+        } else {
+            toast.success(response.msg);
+            loadStudentList();
         }
     });
 }
