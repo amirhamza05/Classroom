@@ -6,6 +6,11 @@ use Illuminate\Support\ServiceProvider;
 use View;
 use App\Http\Controllers\Layout\LayoutController as Layout;
 
+use App\Models\User;
+use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -26,5 +31,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::share('layout', 'no_layout');
+        
+       
+            view()->composer('*', function($view)
+         {
+          if (Auth::check()) {
+       
+           View::share('userType', strtolower(Auth::user()->user_type));
+          }
+        });
+           
     }
 }

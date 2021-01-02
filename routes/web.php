@@ -109,12 +109,14 @@ Route::group(['middleware' => ['admin']], function () {
 
 Route::get('/test', "Home\home@test");
 
-Route::get('/student/dashboard', 'Home\home@studentDashboard');
-Route::get('/logout', 'Auth\LoginController@logout');
+// Route::get('/student/dashboard', 'Home\home@studentDashboard');
+// Route::get('/logout', 'Auth\LoginController@logout');
 
-//student panel
-Route::group(['prefix' => 'student', 'middleware' => ['student']], function () {
-    Route::get('/dashboard', 'Home\home@teacherDashboard');
+
+
+Route::group(['prefix' => 'student','middleware' => ['student']], function () {
+    Route::get('/dashboard', 'Home\home@studentDashboard');
+
     Route::get('/logout', 'Auth\LoginController@logout');
 
     //profile
@@ -124,7 +126,8 @@ Route::group(['prefix' => 'student', 'middleware' => ['student']], function () {
     //---course
     //get
     Route::get('/courses', 'Course\CoursePageController@viewCourseList');
-    Route::get('/courses/create', 'Course\CoursePageController@createCourse');
+    Route::get('/courses/join', 'Course\CoursePageController@joinCourse');
+
 
     Route::group(['prefix' => 'courses/{course_id}', 'middleware' => ['course']], function () {
 
@@ -132,6 +135,7 @@ Route::group(['prefix' => 'student', 'middleware' => ['student']], function () {
         Route::post('/confirm', 'Course\CourseController@confirmRequest');
         Route::get('/dashboard', 'Course\CoursePageController@viewDashboard');
         Route::get('/teachers', 'Course\CoursePageController@viewTeacherList');
+
         Route::get('/students', 'Course\CoursePageController@viewStudentList');
         Route::get('/setting', 'Course\CoursePageController@setting');
         Route::get('/setting/leave', 'Course\CourseController@leave');
@@ -142,28 +146,17 @@ Route::group(['prefix' => 'student', 'middleware' => ['student']], function () {
          Route::get('/comment/{comment_id}/update', 'Course\CommentController@updatePage');
          Route::post('/comment/{comment_id}/update', 'Course\CommentController@update');
          Route::get('/comment/{comment_id}/delete', 'Course\CommentController@delete');
+ 
          Route::post('/comment/{comment_id}/comment-reply', 'Course\CommentReplyController@create');
-        
          Route::get('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@updatePage');
          Route::post('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@update');
          Route::get('/comment_reply/{comment_reply_id}/delete', 'Course\CommentReplyController@deletePage');
-     
-        //course admin area
-        Route::group(['middleware' => ['course.admin']], function () {
-
-            Route::post('/teachers/create', 'Course\CourseController@addTeacher');
-            Route::get('/teachers/create', 'Course\CoursePageController@viewAddTeacher');
-            Route::get('/teachers/delete', 'Course\CourseController@deleteTeacher');
-            Route::get('/setting/delete', 'Course\CourseController@delete');
-            Route::post('/setting/archive', 'Course\CourseController@updateArchive');
-        });
         
-       
-
     });
 
     //post
-    Route::post('/courses/create', 'Course\CourseController@create');
+    Route::post('/courses/join', 'Course\CourseController@join');
+
 
     //end classroom --------------------
 

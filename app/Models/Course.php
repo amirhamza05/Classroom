@@ -59,6 +59,9 @@ class Course extends Model
     public function isTeacher(){
         return $this->teachers()->where(['id' => auth()->user()->id])->exists();
     }
+    public function isStudent(){
+        return $this->teachers()->where(['id' => auth()->user()->id])->exists();
+    }
     public function isAccept(){
         return $this->teachers()->where(['id' => auth()->user()->id,'status'=>'accept'])->exists();
     }
@@ -66,10 +69,12 @@ class Course extends Model
     {
         return $this->belongsToMany(User::class, 'course_teachers', 'course_id', 'user_id')->withPivot(['role']);
     }
+
     public function students()
     {
         return $this->belongsToMany(User::class, 'course_students', 'course_id', 'user_id')->withPivot(['status']);
     }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);

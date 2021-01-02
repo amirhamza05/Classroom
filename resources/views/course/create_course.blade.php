@@ -1,5 +1,5 @@
 <div id="errorMsg"></div>
-<form action="{{url('teacher/courses/create')}}" id="create_course" method="post">
+<form action="{{url($userType.'/courses/create')}}" id="create_course" method="post">
 	@csrf
 <div class="course-list">
 <div class="row">

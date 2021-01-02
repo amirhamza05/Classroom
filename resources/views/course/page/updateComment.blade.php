@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+<form method = "post" action = "{{url($userType.'/courses/'.$commentData->course_id.'/comment/'.$commentData->id.'/update')}} ">                
+=======
 <form method="post" action="{{url('teacher/courses/'.$commentData->course_id.'/comment/'.$commentData->id.'/update')}} ">                
+>>>>>>> b44a606ce08ec368186eff64208b6cd4a32dada1
      @csrf
 		<div class="form-group">
 	   <textarea name="comment" rows="3" class="text-area-messge form-control"

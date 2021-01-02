@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Course;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Course\CourseCreate;
 use App\Http\Requests\Course\TeacherAdd;
+use App\Http\Requests\Course\CourseJoin;
 use App\Http\Requests\Course\StudentAdd;
+
 //custom controllers
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 
@@ -23,6 +26,29 @@ class CourseController extends Controller
             'msg' => "Successfully added new course"
         ]);
     }
+
+    public function join(CourseJoin $request)
+    {
+       
+        $courseData = Course::where(['code'=>request()->code])->firstOrFail();
+        $check = $courseData->students()->where(['user_id'=>auth()->user()->id])->first();
+  
+       if($check==null){
+            $courseData->students()->attach(auth()->user()->id);
+            return response()->json([
+            'error'     => 0,
+            'msg' => "Successfully added new course"
+            ]);
+       }
+       else{
+            return response()->json([
+            'error'     => 1,
+            'msg' => "Already joined in this course"
+             ]);
+       }  
+    }
+
+
     public function update(CourseCreate $request)
     {
         $courseData = Course::create($request->all());
@@ -54,8 +80,14 @@ class CourseController extends Controller
     public function confirmRequest(){
         Course::find(request()->course_id)->teachers()->updateExistingPivot(auth()->user()->id, array('status' => 'accept'), false);
     }
+
     public function leave(){
+        if(request()->user()->user_type == 'Student'){
+            Course::find(request()->course_id)->students()->detach(auth()->user()->id);
+        }
+        else{
         Course::find(request()->course_id)->teachers()->detach(auth()->user()->id);
+        }
         return response()->json([
             'error' => 0,
             'msg'   => "Successfully leave you in this course",

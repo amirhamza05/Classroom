@@ -20,6 +20,10 @@ class CoursePageController extends Controller
     {
         return view('course.create_course');
     }
+    public function joinCourse()
+    {
+        return view('course.join_course');
+    }
     public function setting(){
         return Layout::view("course.page.setting", $this->mergeDefaultData());
     }
