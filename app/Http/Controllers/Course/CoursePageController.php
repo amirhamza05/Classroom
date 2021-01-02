@@ -41,6 +41,10 @@ class CoursePageController extends Controller
     {
         return Layout::view("course.page.teacher_list", $this->mergeDefaultData());
     }
+    public function viewStudentList()
+    {
+        return Layout::view("course.page.student_list", $this->mergeDefaultData());
+    }
     public function viewDashboard()
     {
         return Layout::view("course.dashboard", $this->mergeDefaultData());

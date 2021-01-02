@@ -70,13 +70,10 @@ class Course extends Model
         return $this->belongsToMany(User::class, 'course_teachers', 'course_id', 'user_id')->withPivot(['role']);
     }
 
-   
-   
     public function students()
     {
         return $this->belongsToMany(User::class, 'course_students', 'course_id', 'user_id')->withPivot(['status']);
     }
-    
 
     public function comments()
     {

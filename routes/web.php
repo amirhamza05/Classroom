@@ -53,6 +53,7 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
         Route::post('/confirm', 'Course\CourseController@confirmRequest');
         Route::get('/dashboard', 'Course\CoursePageController@viewDashboard');
         Route::get('/teachers', 'Course\CoursePageController@viewTeacherList');
+        Route::get('/students', 'Course\CoursePageController@viewStudentList');
         Route::get('/setting', 'Course\CoursePageController@setting');
         Route::get('/setting/leave', 'Course\CourseController@leave');
         
@@ -76,6 +77,10 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
             Route::get('/teachers/delete', 'Course\CourseController@deleteTeacher');
             Route::get('/setting/delete', 'Course\CourseController@delete');
             Route::post('/setting/archive', 'Course\CourseController@updateArchive');
+
+            Route::get('/students/create', 'Course\CourseController@addStudent');
+            Route::get('/students/delete/{user_id}', 'Course\CourseController@deleteStudent');
+
         });
         
        
@@ -111,6 +116,7 @@ Route::get('/test', "Home\home@test");
 
 Route::group(['prefix' => 'student','middleware' => ['student']], function () {
     Route::get('/dashboard', 'Home\home@studentDashboard');
+
     Route::get('/logout', 'Auth\LoginController@logout');
 
     //profile
@@ -122,12 +128,15 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
     Route::get('/courses', 'Course\CoursePageController@viewCourseList');
     Route::get('/courses/join', 'Course\CoursePageController@joinCourse');
 
+
     Route::group(['prefix' => 'courses/{course_id}', 'middleware' => ['course']], function () {
 
         Route::get('/', 'Course\CoursePageController@viewDashboard');
         Route::post('/confirm', 'Course\CourseController@confirmRequest');
         Route::get('/dashboard', 'Course\CoursePageController@viewDashboard');
         Route::get('/teachers', 'Course\CoursePageController@viewTeacherList');
+
+        Route::get('/students', 'Course\CoursePageController@viewStudentList');
         Route::get('/setting', 'Course\CoursePageController@setting');
         Route::get('/setting/leave', 'Course\CourseController@leave');
         
@@ -137,8 +146,7 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
          Route::get('/comment/{comment_id}/update', 'Course\CommentController@updatePage');
          Route::post('/comment/{comment_id}/update', 'Course\CommentController@update');
          Route::get('/comment/{comment_id}/delete', 'Course\CommentController@delete');
-       
-         
+ 
          Route::post('/comment/{comment_id}/comment-reply', 'Course\CommentReplyController@create');
          Route::get('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@updatePage');
          Route::post('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@update');
@@ -149,6 +157,7 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
     //post
     Route::post('/courses/join', 'Course\CourseController@join');
 
+
     //end classroom --------------------
 
     Route::get('/routine', 'User\LoginUserController@getProfile');
@@ -157,4 +166,3 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
         return view('user.update_profile');
     });
 });
-
