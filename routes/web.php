@@ -34,12 +34,15 @@ Route::group(['middleware' => ['guest']], function () {
     });
 });
 
-Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
+  Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
     Route::get('/dashboard', 'Home\home@teacherDashboard');
     Route::get('/logout', 'Auth\LoginController@logout');
 
     //profile
     Route::get('/profile', 'User\LoginUserController@getProfile');
+    Route::post('/profile/{user_id}', 'User\LoginUserController@updateProfileDetail');
+    Route::post('/profile/{user_id}/password', 'User\LoginUserController@updatePassword');
+
     Route::get('/api/teacher_list', 'Course\CourseController@teacherList');
 
     //---course
@@ -121,6 +124,11 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
 
     //profile
     Route::get('/profile', 'User\LoginUserController@getProfile');
+    Route::post('/profile/{user_id}', 'User\LoginUserController@updateProfileDetail');
+    Route::post('/profile/{user_id}/password', 'User\LoginUserController@updatePassword');
+
+
+
     Route::get('/api/teacher_list', 'Course\CourseController@teacherList');
 
     //---course

@@ -51,6 +51,14 @@ function loadTeacherList() {
     url.load(url.get());
 }
 
+function loadComment() {
+    url.load(url.get());
+}
+
+function loadReply() {
+    url.load(url.get());
+}
+
 function loadStudentList() {
     url.load(url.get());
 }
@@ -139,6 +147,40 @@ function deleteTeacher(userId) {
         } else {
             toast.success(response.msg);
             loadTeacherList();
+        }
+    });
+}
+
+function deleteComment(commentId) {
+    var ok = confirm("Are you want to delete this Comment");
+    if (!ok) return;
+    var data = {
+        'comment_id': commentId
+    };
+    $.get(url.get(1) + "/delete", app.setToken(data), function(response) {
+        console.log(response);
+        if (response.error == 1) {
+            toast.danger(response.errorMsg);
+        } else {
+            toast.success(response.msg);
+            loadComment();
+        }
+    });
+}
+
+function deleteReply(replyId) {
+    var ok = confirm("Are you want to delete this Comment");
+    if (!ok) return;
+    var data = {
+        'reply_id': replyId
+    };
+    $.get(url.get(1) + "/delete", app.setToken(data), function(response) {
+        console.log(response);
+        if (response.error == 1) {
+            toast.danger(response.errorMsg);
+        } else {
+            toast.success(response.msg);
+            loadReply();
         }
     });
 }
