@@ -1,0 +1,143 @@
+body{
+	background-color: #f6f6f6;
+	margin: 0;
+	width: 100%;
+}
+canvas{
+	background-color: #fff;
+	border: 1px solid #dddddd;
+	border: 0px 1px 1px 1px;
+	display:block;
+	padding:0;
+	cursor:context-menu;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+	margin-top: 10px;
+}
+
+.left-area{
+	position: absolute;
+	width: 210px;
+	height: 615px;
+	overflow-y: scroll;
+	text-align: center;
+	padding-top: 5px;
+	margin-top: -10px;
+	background-color: #f9f9f9;
+	
+}
+
+/* width */
+.left-area::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+.left-area::-webkit-scrollbar-track {
+  background: #f7f7f7;
+}
+
+/* Handle */
+.left-area::-webkit-scrollbar-thumb {
+  background: #dddddd;
+}
+
+/* Handle on hover */
+.left-area::-webkit-scrollbar-thumb:hover {
+  background: #dddddd;
+}
+
+.left-area .boardImg{
+	width: 170px;
+	height: 100px;
+	margin-bottom: 10px;
+	border: 2px solid #CCCCCC;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.footerToolArea{
+	margin-top: 5px;
+	text-align: center;
+}
+
+#toolbar ul li{
+	cursor:pointer;
+	display: inline-block;
+	width:50px;
+	height:50px;
+	padding-top: 6px;
+	padding-left: 1px;
+	margin-right: 5px;
+	border-radius:100%;
+	font-size: 25px;
+	border: 2px solid #dddddd;
+	background-color: #fff;
+	text-align: center;
+}
+
+
+
+#toolbar .active{
+	background-color: #3C4043;
+	color: #ffffff;
+}
+
+.addBtn{
+	border: 2px solid #dddddd;
+	padding: 5px;
+	border-radius: 5px;
+}
+.addBtn:focus{
+	outline: none;
+}
+
+#toolbar ul li:hover{
+	cursor: pointer;
+}
+
+#controls ul li{
+	cursor:pointer;
+	display: inline-block;
+	width:23px;
+	height:23px;
+	margin-right: 5px;
+	border-radius:100%;
+}
+
+.theme1{
+	background-color: #6D214F;
+}
+.theme2{
+	background-color: #F97F51;
+}
+
+.theme3{
+	background-color: #2980b9;
+}
+
+.theme4{
+	background-color:#d35400;
+}
+
+.theme5{
+	background-color: #2c3e50;
+}
+.theme6{
+	background-color:#c0392b;
+}
+
+.theme7{
+	background-color: #27ae60;
+}
+.theme8{
+	background-color:#f39c12;
+}
+
+.selected{
+	border: 3px solid #000000;
+}
+
+#colorSelect{
+	display:none;
+}
+

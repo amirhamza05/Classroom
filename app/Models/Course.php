@@ -79,8 +79,8 @@ class Course extends Model
     {
         return $this->hasMany(Comment::class);
     }
-    public function discussions(){
-        //return $this->hashMany()''
+    public function schedules(){
+       return $this->hasMany(Schedule::class);
     }
 
 }

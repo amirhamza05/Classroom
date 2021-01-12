@@ -52,4 +52,8 @@ class CoursePageController extends Controller
     public function viewAddTeacher(){
         return view('course.page.add_teacher');
     }
+
+    public function viewScheduleList(){
+        //return Layout::view("course.schedule.schedule_list", $this->mergeDefaultData());
+    }
 }

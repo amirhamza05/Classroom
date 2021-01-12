@@ -56,19 +56,51 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
         Route::get('/students', 'Course\CoursePageController@viewStudentList');
         Route::get('/setting', 'Course\CoursePageController@setting');
         Route::get('/setting/leave', 'Course\CourseController@leave');
-        
-          
-         //post comment
-         Route::post('/comment', 'Course\CommentController@create');
-         Route::get('/comment/{comment_id}/update', 'Course\CommentController@updatePage');
-         Route::post('/comment/{comment_id}/update', 'Course\CommentController@update');
-         Route::get('/comment/{comment_id}/delete', 'Course\CommentController@delete');
-         Route::post('/comment/{comment_id}/comment-reply', 'Course\CommentReplyController@create');
-        
-         Route::get('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@updatePage');
-         Route::post('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@update');
-         Route::get('/comment_reply/{comment_reply_id}/delete', 'Course\CommentReplyController@deletePage');
-     
+
+        //post comment
+        Route::post('/comment', 'Course\CommentController@create');
+        Route::get('/comment/{comment_id}/update', 'Course\CommentController@updatePage');
+        Route::post('/comment/{comment_id}/update', 'Course\CommentController@update');
+        Route::get('/comment/{comment_id}/delete', 'Course\CommentController@delete');
+        Route::post('/comment/{comment_id}/comment-reply', 'Course\CommentReplyController@create');
+
+        Route::get('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@updatePage');
+        Route::post('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@update');
+        Route::get('/comment_reply/{comment_reply_id}/delete', 'Course\CommentReplyController@deletePage');
+
+        //schedule
+
+        Route::group(['prefix' => 'schedule/'], function () {
+            Route::get('/', 'Course\ScheduleController@scheduleList');
+            Route::get('/create', 'Course\ScheduleController@viewCreateSchedule');
+            Route::post('/create', 'Course\ScheduleController@createSchedule');
+            
+            Route::group(['prefix' => '{schedule_id}/'], function () {
+                Route::get('/update', 'Course\ScheduleController@viewUpdateSchedule');
+                Route::post('/update', 'Course\ScheduleController@updateSchedule')->name('schedule_update');
+                Route::post('/update', 'Course\ScheduleController@updateSchedule')->name('schedule_update');
+                Route::get('/delete', 'Course\ScheduleController@deleteSchedule');
+
+                Route::get('/board/', 'Course\ScheduleController@getBoard');
+                Route::post('/board/save', 'Course\ScheduleController@saveBoard');
+
+                Route::get('/whiteboard', 'Course\ScheduleController@viewWhiteboard');
+                Route::get('/whiteboard/get', 'Course\ScheduleController@getBoard');
+                Route::post('/whiteboard/save', 'Course\ScheduleController@saveBoard');
+                Route::get('/whiteboard/download', 'Course\ScheduleController@downloadBoard');
+                
+                Route::post('/send_conversation', 'Course\ScheduleController@sendConversation');
+                Route::get('/conversations', 'Course\ScheduleController@viewConversations');
+
+                Route::get('/', 'Course\ScheduleController@viewSchedule');
+                Route::get('/', 'Course\ScheduleController@viewSchedule');
+
+                Route::get('/present_graph', function () {
+                    return view('course.schedule.class_present_graph');
+                });
+            });
+        });
+
         //course admin area
         Route::group(['middleware' => ['course.admin']], function () {
 
@@ -82,8 +114,6 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
             Route::get('/students/delete/{user_id}', 'Course\CourseController@deleteStudent');
 
         });
-        
-       
 
     });
 
@@ -112,9 +142,7 @@ Route::get('/test', "Home\home@test");
 // Route::get('/student/dashboard', 'Home\home@studentDashboard');
 // Route::get('/logout', 'Auth\LoginController@logout');
 
-
-
-Route::group(['prefix' => 'student','middleware' => ['student']], function () {
+Route::group(['prefix' => 'student', 'middleware' => ['student']], function () {
     Route::get('/dashboard', 'Home\home@studentDashboard');
 
     Route::get('/logout', 'Auth\LoginController@logout');
@@ -128,7 +156,6 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
     Route::get('/courses', 'Course\CoursePageController@viewCourseList');
     Route::get('/courses/join', 'Course\CoursePageController@joinCourse');
 
-
     Route::group(['prefix' => 'courses/{course_id}', 'middleware' => ['course']], function () {
 
         Route::get('/', 'Course\CoursePageController@viewDashboard');
@@ -139,24 +166,22 @@ Route::group(['prefix' => 'student','middleware' => ['student']], function () {
         Route::get('/students', 'Course\CoursePageController@viewStudentList');
         Route::get('/setting', 'Course\CoursePageController@setting');
         Route::get('/setting/leave', 'Course\CourseController@leave');
-        
-          
-         //post comment
-         Route::post('/comment', 'Course\CommentController@create');
-         Route::get('/comment/{comment_id}/update', 'Course\CommentController@updatePage');
-         Route::post('/comment/{comment_id}/update', 'Course\CommentController@update');
-         Route::get('/comment/{comment_id}/delete', 'Course\CommentController@delete');
- 
-         Route::post('/comment/{comment_id}/comment-reply', 'Course\CommentReplyController@create');
-         Route::get('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@updatePage');
-         Route::post('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@update');
-         Route::get('/comment_reply/{comment_reply_id}/delete', 'Course\CommentReplyController@deletePage');
-        
+
+        //post comment
+        Route::post('/comment', 'Course\CommentController@create');
+        Route::get('/comment/{comment_id}/update', 'Course\CommentController@updatePage');
+        Route::post('/comment/{comment_id}/update', 'Course\CommentController@update');
+        Route::get('/comment/{comment_id}/delete', 'Course\CommentController@delete');
+
+        Route::post('/comment/{comment_id}/comment-reply', 'Course\CommentReplyController@create');
+        Route::get('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@updatePage');
+        Route::post('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@update');
+        Route::get('/comment_reply/{comment_reply_id}/delete', 'Course\CommentReplyController@deletePage');
+
     });
 
     //post
     Route::post('/courses/join', 'Course\CourseController@join');
-
 
     //end classroom --------------------
 

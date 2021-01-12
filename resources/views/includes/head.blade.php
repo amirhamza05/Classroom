@@ -9,3 +9,5 @@
 
 <!-- App Stylesheet -->
 @include('includes.style')
+
+	<script type="text/javascript" src="https://rawrfl.es/jquery-drawr/jquery.drawr.combined.js?v=2"></script>

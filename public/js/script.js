@@ -35,8 +35,8 @@ var app = {
 };
 var url = {
     get: function(noParm) {
-        if (noParm) return location.protocol + '//' + location.host + location.pathname;
-        return window.location.href;
+        var newUrl = (noParm) ? location.protocol + '//' + location.host + location.pathname : window.location.href;
+        return (newUrl.substr(newUrl.length - 1) == "/") ? newUrl.slice(0,-1) : newUrl;
     },
     set: function(data, title, url) {
         if (this.get() != url) history.pushState(data, title, url);

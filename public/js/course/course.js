@@ -194,3 +194,81 @@ function getTeacherList() {
         $("#select-search-area-loader").hide();
     });
 }
+// schedule area
+function loadCreateSchedule() {
+    modal.md.open("Create Schedule");
+    loader(modal.md.body);
+    $.get(url.get(1) + "/create", function(response) {
+        modal.md.setBody(response);
+    });
+}
+
+function loadUpdateSchedule(scheduleId) {
+    modal.md.open("Update Schedule");
+    loader(modal.md.body);
+    var data = {
+        'schedule_id': scheduleId
+    };
+    $.get(url.get(1) + "/" + scheduleId + "/update", data, function(response) {
+        modal.md.setBody(response);
+    });
+}
+
+function deleteSchedule(scheduleId) {
+    var ok = confirm("Are you want to delete this schedule class");
+    if (!ok) return;
+    $.get(url.get(1) + "/" + scheduleId + "/delete", function(response) {
+        toast.success(response.msg);
+        url.load();
+    }).fail(function(error) {
+        failError.toast(error);
+    });
+}
+
+function timeConvert(timeDiffrent) {
+    timeDiffrent = timeDiffrent <= 0 ? 0 : timeDiffrent;
+    hour = Math.floor(timeDiffrent / 3600);
+    timeDiffrent -= hour * 3600;
+    minute = Math.floor(timeDiffrent / 60);
+    timeDiffrent -= minute * 60;
+    second = timeDiffrent;
+    if (hour < 10) hour = "0" + hour;
+    if (minute < 10) minute = "0" + minute;
+    if (second < 10) second = "0" + second;
+    var data = {
+        'hour': hour,
+        'minute': minute,
+        'second': second
+    }
+    return data;
+}
+var loadConversationAreaFlag = 0;
+function loadConversationArea(){
+    $.get(url.get(1)+"/conversations", function(response) {
+        if(response != $("#conversationBody").html() || loadConversationAreaFlag == 0){
+            $("#conversationBody").html(response);
+            loadConversationAreaFlag = 1;
+        }
+        //clearInterval(updateConversationArea);
+    }).fail(function(error) {
+        clearInterval(updateConversationArea);
+    });
+}
+
+function sendConversation(){
+    var message = $("#message").val();
+    if(message == ""){
+        alert("Message Can Not Be Empty");
+        return;
+    }
+    var data = {
+        'message': message
+    };
+
+    $.post(url.get(1) + "/send_conversation", app.setToken(data), function(response) {
+       $("#message").val("");
+       loadConversationArea();
+    }).fail(function(error) {
+        failError.toast(error);
+    });
+}
