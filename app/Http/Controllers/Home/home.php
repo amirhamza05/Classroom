@@ -72,4 +72,8 @@ class home extends Controller
         }
         return "Request Not Found";
     }
+
+    public function test(){
+        return view("test");
+    }
 }

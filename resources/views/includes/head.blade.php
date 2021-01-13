@@ -10,4 +10,4 @@
 <!-- App Stylesheet -->
 @include('includes.style')
 
-	<script type="text/javascript" src="https://rawrfl.es/jquery-drawr/jquery.drawr.combined.js?v=2"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>

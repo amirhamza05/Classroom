@@ -1,5 +1,6 @@
 var teacherAddCartList;
 var teacherData = [];
+var commentEditor = [];
 
 function getCourseId() {
     return $('meta[name="course-id"]').attr('content');
@@ -150,14 +151,49 @@ function deleteTeacher(userId) {
         }
     });
 }
+//comment area
+function postDiscussion() {
+    var comment = postEditor.getData();
+    if (comment == "") {
+        alert("Discussion Can Not Be Empty");
+        return;
+    }
+    var data = {
+        'comment': comment
+    };
+    $.post(url.get() + "/comment", app.setToken(data), function(response) {
+        toast.success(response.msg);
+        url.load();
+    }).fail(function(error) {
+        failError.toast(error);
+    });
+}
+
+function loadUpdateComment(commentId) {
+    modal.lg.open("Update Discussion");
+    loader(modal.lg.body);
+    $.get(url.get(1) + "/comment/" + commentId + "/update", function(response) {
+        modal.lg.setBody(response);
+    });
+}
+
+function updateComment(commentId) {
+    var data = {
+        'comment': commentEditor[commentId].getData()
+    };
+    $.post(url.get() + "/comment/" + commentId + "/update", app.setToken(data), function(response) {
+        toast.success(response.msg);
+        url.load();
+        modal.lg.close();
+    }).fail(function(error) {
+        failError.toast(error);
+    });
+}
 
 function deleteComment(commentId) {
     var ok = confirm("Are you want to delete this Comment");
     if (!ok) return;
-    var data = {
-        'comment_id': commentId
-    };
-    $.get(url.get(1) + "/delete", app.setToken(data), function(response) {
+    $.get(url.get(1) + "/comment/" + commentId + "/delete", function(response) {
         console.log(response);
         if (response.error == 1) {
             toast.danger(response.errorMsg);
@@ -168,13 +204,10 @@ function deleteComment(commentId) {
     });
 }
 
-function deleteReply(replyId) {
-    var ok = confirm("Are you want to delete this Comment");
+function deleteCommentReply(replyId) {
+    var ok = confirm("Are you want to delete this Reply");
     if (!ok) return;
-    var data = {
-        'reply_id': replyId
-    };
-    $.get(url.get(1) + "/delete", app.setToken(data), function(response) {
+    $.get(url.get(1) + "/comment_reply/" + replyId + "/delete", function(response) {
         console.log(response);
         if (response.error == 1) {
             toast.danger(response.errorMsg);
@@ -185,6 +218,47 @@ function deleteReply(replyId) {
     });
 }
 
+function loadUpdateCommentReply(replyId) {
+    modal.md.open("Update Reply");
+    loader(modal.md.body);
+    $.get(url.get(1) + "/comment-reply/" + replyId + "/update", function(response) {
+        modal.md.setBody(response);
+    });
+}
+
+function updateCommentReply(replyId) {
+    var data = {
+        'comment_reply': $("#comment_reply_"+replyId).val()
+    };
+    $.post(url.get() + "/comment-reply/" + replyId + "/update", app.setToken(data), function(response) {
+        toast.success(response.msg);
+        url.load();
+        modal.md.close();
+    }).fail(function(error) {
+        failError.toast(error);
+    });
+}
+
+
+function addCommentReply(commentId) {
+    commentReply = $("#comment_reply_" + commentId).val();
+    if (commentReply == "") {
+        alert("Comment Reply Can Not Be Empty");
+        return;
+    }
+    var data = {
+        'comment_reply': commentReply
+    };
+    console.log(commentId);
+    $.post(url.get(1) + "/comment/" + commentId + "/comment-reply", app.setToken(data), function(response) {
+        toast.success(response.msg);
+        url.load();
+    }).fail(function(error) {
+        failError.toast(error);
+        console.log(error);
+    });
+}
+//delete comment area
 function archiveCourseAction(isArchive) {
     msg = isArchive ? "current" : "archive";
     msg = "Are you want to add " + msg + " this course";
@@ -285,9 +359,10 @@ function timeConvert(timeDiffrent) {
     return data;
 }
 var loadConversationAreaFlag = 0;
-function loadConversationArea(){
-    $.get(url.get(1)+"/conversations", function(response) {
-        if(response != $("#conversationBody").html() || loadConversationAreaFlag == 0){
+
+function loadConversationArea() {
+    $.get(url.get(1) + "/conversations", function(response) {
+        if (response != $("#conversationBody").html() || loadConversationAreaFlag == 0) {
             $("#conversationBody").html(response);
             loadConversationAreaFlag = 1;
         }
@@ -297,19 +372,18 @@ function loadConversationArea(){
     });
 }
 
-function sendConversation(){
+function sendConversation() {
     var message = $("#message").val();
-    if(message == ""){
+    if (message == "") {
         alert("Message Can Not Be Empty");
         return;
     }
     var data = {
         'message': message
     };
-
     $.post(url.get(1) + "/send_conversation", app.setToken(data), function(response) {
-       $("#message").val("");
-       loadConversationArea();
+        $("#message").val("");
+        loadConversationArea();
     }).fail(function(error) {
         failError.toast(error);
     });
