@@ -1,7 +1,8 @@
 body {
     font-family: "Exo 2";
-    background-color: #F1F3F8;
+    background-color: #f7f7f7;
 }
+
 
 .errorArea {
     color: red;
@@ -9,8 +10,8 @@ body {
     display: none;
     margin-bottom: 10px;
     padding: 10px;
-}
 
+}
 .row {
     margin-left: 0px;
     margin-right: 0px;

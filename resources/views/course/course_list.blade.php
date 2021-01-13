@@ -1,10 +1,11 @@
 @extends($layout)
 @section('title', 'Course List')
-	<style type="text/css">
+<style type="text/css">
+	
 		.course-list{
 
 		}
-		
+
 		.course-list .header{
 			font-weight: bold;
 			font-size: 16px;
@@ -91,7 +92,7 @@ button:focus {
 
 }
 .course-list .card:hover{
-	box-shadow: 5px 5px 10px 3px #aaaaaa;	
+	box-shadow: 5px 5px 10px 3px #aaaaaa;
 }
 .course-list .card img{
 	height: 75px;
@@ -101,9 +102,7 @@ button:focus {
 	height: 85px;
 	padding: 3px;
 }
-
-	</style>
-
+</style>
 	<div class="course-list">
 		<div class="header">
 			<div class="row">
