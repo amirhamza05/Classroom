@@ -163,12 +163,6 @@ button:focus {
             'icon'  => 'fas fa-user',
             'title' => 'Schedule'
         ],
-
-        '/grade' => [
-            'icon'  => 'fas fa-sign-out-alt',
-            'title' => 'Grade'
-        ],
-
         '/setting' => [
             'icon'  => 'fas fa-sign-out-alt',
             'title' => 'Setting'

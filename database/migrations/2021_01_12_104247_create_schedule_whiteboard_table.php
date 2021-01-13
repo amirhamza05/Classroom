@@ -16,7 +16,7 @@ class CreateScheduleWhiteboardTable extends Migration
         Schema::create('schedule_whiteboard', function (Blueprint $table) {
             $table->id();
             $table->foreignId('schedule_id');
-            $table->string("board")->nullable();
+            $table->string("board_hash")->nullable();
             $table->string("last_update_hash")->nullable();
             $table->timestamps();
 

@@ -1,11 +1,14 @@
 //single page load
 $(document).ready(function() {
     $('body').on('click', 'a', function(e) {
-        var title = $(this).attr("title");
-        if (title == "logout") return;
-        e.preventDefault();
-        url.load($(this).attr("href"));
-        setActiveSidebarClass();
+        var link = $(this).attr("href");
+        if (link.indexOf("127.0.0.1") >= 0) {
+            var title = $(this).attr("title");
+            if (title == "logout") return;
+            e.preventDefault();
+            url.load(link);
+            setActiveSidebarClass();
+        }
     });
     $(window).on('popstate', function(event) {
         setActiveSidebarClass();
@@ -36,7 +39,7 @@ var app = {
 var url = {
     get: function(noParm) {
         var newUrl = (noParm) ? location.protocol + '//' + location.host + location.pathname : window.location.href;
-        return (newUrl.substr(newUrl.length - 1) == "/") ? newUrl.slice(0,-1) : newUrl;
+        return (newUrl.substr(newUrl.length - 1) == "/") ? newUrl.slice(0, -1) : newUrl;
     },
     set: function(data, title, url) {
         if (this.get() != url) history.pushState(data, title, url);
