@@ -2,12 +2,16 @@
 $(document).ready(function() {
     $('body').on('click', 'a', function(e) {
         var link = $(this).attr("href");
-        if (link.indexOf("127.0.0.1") >= 0) {
+        if (link.indexOf(document.domain) >= 0) {
             var title = $(this).attr("title");
             if (title == "logout") return;
             e.preventDefault();
             url.load(link);
             setActiveSidebarClass();
+        }
+        else{
+            e.preventDefault();
+            window.open(link, '_blank');
         }
     });
     $(window).on('popstate', function(event) {
