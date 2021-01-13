@@ -293,12 +293,26 @@
    
   <li style="font-size:1.1em;"class="fas fa-edit"></li></a>
   @endif 
-   <!-- update -->
+   <!-- delete -->
    @if(Auth::user()->id == $comment->user->id || $courseData->isAdmin()) 
-   <a href="{{url($userType.'/courses/'.$courseData->id.'/comment/'.$comment->id.'/delete')}}">
+   <a id='del' onclick="deleteComment({{$comment->id}})" href="{{url($userType.'/courses/'.$courseData->id.'/comment/'.$comment->id.'/delete')}}">
   
   <li style="font-size:1.1em;" class="fas fa-trash"></li></a>
-   
+  <!-- <script type="text/javascript">
+	$(document).ready(function(){
+  		$("#del").submit(function(event){
+    		event.preventDefault(); //prevent default action
+    		var formData = $(this).serializeArray();
+    		$.post("{{url($userType.'/courses/'.$courseData->id.'/comment/'.$comment->id.'/delete')}}" , formData, function(response) {
+        		toast.success(response.msg);
+        		url.load();
+
+    		}).fail(function(error) {
+        		failError.toast(error.msg);
+    		});
+  		});
+	});
+	</script> -->
    @endif 
 </div>
    </div>
@@ -337,7 +351,7 @@
   @endif 
    <!-- update -->
    @if(Auth::user()->id == $reply->user->id || $courseData->isAdmin()) 
-   <a href="{{url($userType.'/courses/'.$courseData->id.'/comment_reply/'.$reply->id.'/delete')}}">
+   <a onclick="deleteReply({{$reply->id}})" href="{{url($userType.'/courses/'.$courseData->id.'/comment_reply/'.$reply->id.'/delete')}}">
   
    <li style="font-size:1.0em;"  class="fas fa-trash"></li></a>
    
@@ -364,7 +378,7 @@
  
  <div class="row comment-box-main p-3 rounded-bottom">
 	<div class="col-md-9 col-sm-9 col-9 pr-0 comment-box">
-	<form method="post" action="{{url($userType.'/courses/'.$courseData->id.'/comment/'.$comment->id.'/comment-reply')}}" > 
+	<form id='reply_comment' method="post" action="{{url($userType.'/courses/'.$courseData->id.'/comment/'.$comment->id.'/comment-reply')}}" > 
 	<div  class="form-group">
 	 @csrf
 	 <textarea  id="url" name="comment_reply" cols='10' wrap="pysical"class="text-area-messge form-control"
@@ -375,6 +389,21 @@
 	<button class="btn btn-info">Send</button>
 	</div>
 	</form>
+	<script type="text/javascript">
+	$(document).ready(function(){
+  		$("#reply_comment").submit(function(event){
+    		event.preventDefault(); //prevent default action
+    		var formData = $(this).serializeArray();
+    		$.post("{{url($userType.'/courses/'.$courseData->id.'/comment/'.$comment->id.'/comment-reply')}}" , formData, function(response) {
+        		toast.success(response.msg);
+        		url.load();
+
+    		}).fail(function(error) {
+        		failError.toast(error.msg);
+    		});
+  		});
+	});
+	</script>
  </div>
 </div>
 </div>

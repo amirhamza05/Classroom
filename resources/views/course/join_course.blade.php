@@ -1,9 +1,9 @@
-<div id="errorMsg"></div>
+<div id="errorArea" class='errorArea' style="display:none;"></div>
 <form action="{{url($userType.'/courses/join')}}" id="join_course" method="post">
 	@csrf
 <div class="course-list">
 <div class="row">
-	<div class="col-md-8 inputLabel">Course Code<font color="red">*</font>:</div>
+	<div class="col-md-3 inputLabel">Course Code<font color="red">*</font>:</div>
 	<div class="col-md-8"><input type="text" class="input" name="code" placeholder="Course Code" autocomplete="off"></div>
 
 	<div class="col-md-8"></div>
@@ -15,7 +15,7 @@
 </div>
 </div>
 </form>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	$(document).ready(function(){
   		$("#join_course").submit(function(event){
     		event.preventDefault(); //prevent default action
@@ -24,12 +24,17 @@
         		if (response.error == 0) {
         			modal.md.close();
         			toast.success(response.msg);
-        			url.load(url.get(1)+"/"+response.course_id);
+        			 url.load();
         		}
         		else {
-            		$("#loginResponse").html(response.errorMsg);
+					// $("#loginResponse").html(response.errorMsg);
+					console.log(response.msg);
+					$("#errorArea").show();
+            		$("#errorArea").html(response.msg);
+           			
         		}
     		});
-  		});
+		  });
+		  
 	});
-</script> -->
+</script>

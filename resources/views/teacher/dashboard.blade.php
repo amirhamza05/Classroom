@@ -119,28 +119,163 @@
 
 
 </style>
-<div class="row">
+<div class='container'>
+<div class="row-sm-3" style='margin-left:55px;'>
     <div class="col-lg-3 col-sm-6">
       <div class="circle-tile ">
         <a href="#"><div class="circle-tile-heading dark-blue"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
         <div class="circle-tile-content dark-blue">
-          <div class="circle-tile-description text-faded"> Users</div>
-          <div class="circle-tile-number text-faded ">265</div>
-          <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
+          <div class="circle-tile-description text-faded"> Active</div>
+          <div class="circle-tile-number text-faded ">{{$activeCourseList->count()}}</div>
+
+          <!-- <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a> -->
         </div>
       </div>
     </div>
+  
     <div class="col-lg-3 col-sm-6">
       <div class="circle-tile ">
         <a href="#"><div class="circle-tile-heading red"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
         <div class="circle-tile-content red">
-          <div class="circle-tile-description text-faded"> Users Online </div>
-          <div class="circle-tile-number text-faded ">10</div>
-          <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
+          <div class="circle-tile-description text-faded"> Archive Course</div>
+          <div class="circle-tile-number text-faded ">{{$archiveCourseList->count()}}</div>
+  
+          <!-- <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a> -->
         </div>
       </div>
     </div> 
-  </div> 
+
+  @if(Auth::user()->user_type =="Teacher")
+<div class="col-lg-3 col-sm-6">
+      <div class="circle-tile ">
+        <a href="#"><div class="circle-tile-heading blue"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
+        <div class="circle-tile-content blue">
+          <div class="circle-tile-description text-faded">Request Course </div>
+          <div class="circle-tile-number text-faded ">{{$requestCourseList->count()}}</div>
+          <!-- <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a> -->
+        </div>
+      </div>
+   
 </div>  
-  
+
+
+@endif
 </div>
+</div>
+<h4 style="margin-left:355px;margin-bottom:-17px;"> ACTIVE COURSE LIST </h4>
+@foreach($activeCourseList as $course)
+<!-- {{ $course->name.$course->teachers()->count().$course->students()->count()}} -->
+<div class="container">    
+<!-- <div class="design">       -->
+  <table class="table table-bordered">
+ 
+    <thead>
+      <tr>
+        <th>Course Name</th>
+        <th>Total Teacher</th>
+        <th>Total Student</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ $course->name}}</td>
+        <td>{{$course->teachers()->count()}}</td>
+        <td>{{$course->students()->count()}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- </div> -->
+</div>
+
+@endforeach
+<h4 style="margin-left:355px;margin-bottom:-17px;"> ARCHIVE COURSE LIST </h4>
+@foreach($archiveCourseList as $course)
+
+<div class="container">    
+<!-- <div class="design">       -->
+  <table class="table table-bordered">
+ 
+    <thead>
+      <tr>
+        <th>Course Name</th>
+        <th>Total Teacher</th>
+        <th>Total Student</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ $course->name}}</td>
+        <td>{{$course->teachers()->count()}}</td>
+        <td>{{$course->students()->count()}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- </div> -->
+</div>
+
+@endforeach
+@if(Auth::user()->user_type=='Teacher')
+<h4 style="margin-left:355px;margin-bottom:-17px;"> REQUESTED COURSE LIST </h4>
+@foreach($requestCourseList as $course)
+<div class="container" >    
+<!-- <div class="design">       -->
+  <table class="table table-bordered">
+ 
+    <thead >
+      <tr >
+        <th >Course Name</th>
+        <th>Total Teacher</th>
+        <th>Total Student</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>{{ $course->name}}</td>
+        <td>{{$course->teachers()->count()}}</td>
+        <td>{{$course->students()->count()}}</td>
+      </tr>
+    </tbody>
+
+  </table>
+  <!-- </div> -->
+</div>
+
+@endforeach
+@endif
+<style type="text/css">
+.container{
+    width:100%;
+    
+}
+.container .table-bordered{
+    background: white;
+    width:80%;
+    margin-left: 65px;
+    margin-top:25px;
+  
+  
+}
+.container .table-bordered thead{
+    background: #c9dff1;
+    border-style: solid;
+    border-color: pink;
+   
+}
+.container .table-bordered .thead .tr {
+    color: pink;
+    border-style: solid;
+    border-color: black;
+}
+/* .container .design th{
+    
+    border-style: solid;
+    border-color: #FF83A8;
+} */
+.container .table-bordered tbody{
+    background: #c9dff1;
+    border-style: solid;
+    border-color: pink;
+}
+
+</style>

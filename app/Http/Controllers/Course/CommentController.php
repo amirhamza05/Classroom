@@ -28,6 +28,7 @@ class CommentController extends Controller
             'error' => 0,
             'msg'   => "Successfully delete comment",
         ]);
+       
     }
     public function update(CommentValidation $request)
     {

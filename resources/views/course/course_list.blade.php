@@ -108,7 +108,12 @@ button:focus {
 			<div class="row">
 				<div class="col-md-12">
 					<div class="pull-left" style="margin-top: 7px;">
+					@if(Auth::user()->user_type=="Teacher")
 						<a href="/{{$userType}}/courses"><span class="{{!(isset(request()->request_courses)|isset(request()->archive_course))?'active':'normal'}}"><i class="fa fa-play"></i> Current</span></a> | <a href="/{{$userType}}/courses?archive_course=1"><span class="{{isset(request()->archive_course)?'active':'normal'}}"><i class="fa fa-clock-o"></i> Archive</span></a> | <a href="/{{$userType}}/courses?request_courses=1"><span class="{{isset(request()->request_courses)?'active':'normal'}}"><i class="fa fa-clock-o"></i> Requset</span></a>
+					@endif
+					@if(Auth::user()->user_type=="Student")
+						<a href="/{{$userType}}/courses"><span class="{{!(isset(request()->request_courses)|isset(request()->archive_course))?'active':'normal'}}"><i class="fa fa-play"></i> Current</span></a> | <a href="/{{$userType}}/courses?archive_course=1"><span class="{{isset(request()->archive_course)?'active':'normal'}}"><i class="fa fa-clock-o"></i> Archive</span></a>
+					@endif
 					</div>
 					@if($userType  == 'teacher')
 					<div class="pull-right">
@@ -117,8 +122,8 @@ button:focus {
 					@endif
 					@if($userType  == 'student')
 					<div class="pull-right">
-					<a href="{{url($userType.'/courses/join')}}">
-						<button class="" ><i class="fa fa-plus"></i> Join Course</button></a>
+				
+						<button class=""  onclick="loadJoinCourse()"><i class="fa fa-plus"></i> Join Course</button>
 					</div>
 					@endif
 				</div>

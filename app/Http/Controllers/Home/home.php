@@ -24,16 +24,26 @@ class home extends Controller
             return redirect('/');
         }
         // echo "<center><h1>welcome student dashboard <a href='/logout'>Logout</a></h1></center>";
-       $courseList = auth()->user()->courses()->where(['status'=>'pending'])->get();
-        return Layout::view("teacher.dashboard",['pendingCourseList'=>$courseList]);
+    //    $courseList = auth()->user()->courses()->where(['status'=>'pending'])->get();
+    //     return Layout::view("teacher.dashboard",['pendingCourseList'=>$courseList]);
+        $activeList = auth()->user()->courses()->where(['status' => 'accept','is_archive' => '0'])->get();
+        $requestList = auth()->user()->courses()->where(['status'=>'pending'])->get();
+        $arciveList = auth()->user()->courses()->where(['is_archive' => '1'])->get();
+
+        return Layout::view("teacher.dashboard",['activeCourseList'=> $activeList,'requestCourseList'=> $requestList,'archiveCourseList'=> $arciveList]);
+    
     }
 
     public function teacherDashboard(Request $request){
         if (!Auth::check()) {
             return redirect('/');
         }
-        $courseList = auth()->user()->courses()->where(['status'=>'pending'])->get();
-        return Layout::view("teacher.dashboard",['pendingCourseList'=>$courseList]);
+        
+        $activeList = auth()->user()->courses()->where(['status' => 'accept','is_archive' => '0'])->get();
+        $requestList = auth()->user()->courses()->where(['status'=>'pending'])->get();
+        $arciveList = auth()->user()->courses()->where(['is_archive' => '1'])->get();
+
+        return Layout::view("teacher.dashboard",['activeCourseList'=> $activeList,'requestCourseList'=> $requestList,'archiveCourseList'=> $arciveList]);
     }
 
 
