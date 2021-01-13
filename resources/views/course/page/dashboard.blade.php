@@ -106,7 +106,6 @@
 	padding: 8px 25px; 
 	margin-left: 80px;
 	margin-right: 30px;
-	margin-top:  -48px;
 	overflow: hidden; 
 	box-shadow: 0px 0px 5px rgba(0,0,0,.1); 
 	background: #fff; 
@@ -180,6 +179,8 @@
 	
 }
 
+
+
 </style>
 <!-- <script type="text/javascript">
     function convert(){
@@ -221,52 +222,35 @@
 </br>
 </br>
 <!-- comment/post send section start-->
-      <a class="avatar" href="#">  
-		<img style="border-radius: 100%;border: 1px solid #eeeeee"  width="50" hieght="50"
-            src="{{asset('upload/avatars/default_avatar.png')}}"></a>
-            <div class="card-body">
-			<div class="card">
-			@if ($errors->any())
-           <div class="alert alert-danger">
-             <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-            </ul>
-         </div>
-         @endif
-             <form id="add_discussion" method="post" action=" {{url($userType.'/courses/'.$courseData->id.'/comment')}} ">                
-			 @csrf
-			 <div class="form-group">
+
+
+<style>
+.ck-editor__editable_inline {
+    min-height: 200px;
+}
+</style>
+
+<script>
 	
-			<textarea name="comment" rows="3" class="text-area-messge form-control"
-            placeholder="Create a Post" aria-required="true" aria-invalid="false"></textarea >
-            </div>
-			<div style="float:right;" class=" text-center send-btn">
-	       <button class="btn btn-danger">Post</button>
-	       </div>
-    </form>
-	<script type="text/javascript">
-	$(document).ready(function(){
-  		$("#add_discussion").submit(function(event){
-    		event.preventDefault(); //prevent default action
-    		var formData = $(this).serializeArray();
-    		$.post("{{url($userType.'/courses/'.$courseData->id.'/comment')}}" , formData, function(response) {
-        		toast.success(response.msg);
-        		url.load();
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .then( editor => {
+        	postEditor = editor; // Save for later use.
+    	} )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 
-    		}).fail(function(error) {
-        		failError.toast(error.msg);
-    		});
-  		});
-	});
-	</script>
-    </div>
-   </div>
+<div class="card-body" style="margin-top: 0px;margin-left: 30px;margin-bottom: 15px;padding: 20px;">
+		<div class="card">
+            <div style="border-radius: 10px;height: 180px" id="editor"></div>
+            <div onclick="postDiscussion()" class="pull-right" style="margin-top: 10px;"><button class="btn-primary">Post Discussion</button></div>
+    	</div>
+</div>
+
+
 <!-- comment/post send section end-->
-
-</br>
-</br>
 
  
 
@@ -285,41 +269,26 @@
    <div class="middle-area">
 
    <a   style='color: #241571;font-weight: bolder;'class="name" href="#"><b>{{ $comment->user->full_name }}</b></a>
-   <h6 style='color:#555b57' class="date">{{ $comment->created_at->diffForHumans()}}</h6>
+   <h6 style='color:#555b57;margin-left: 2px;' class="date">{{ $comment->created_at->diffForHumans()}}</h6>
   <!-- update -->
   <div style="float:right;" class='delete-update'>
+  
   @if(Auth::user()->id == $comment->user->id) 
-  <a href="{{url($userType.'/courses/'.$courseData->id.'/comment/'.$comment->id.'/update')}}">
-   
-  <li style="font-size:1.1em;"class="fas fa-edit"></li></a>
+  <button class="btn-sm btn-success" onclick="loadUpdateComment({{$comment->id}})"><i class="fas fa-edit"></i></button>
   @endif 
    <!-- delete -->
    @if(Auth::user()->id == $comment->user->id || $courseData->isAdmin()) 
-   <a id='del' onclick="deleteComment({{$comment->id}})" href="{{url($userType.'/courses/'.$courseData->id.'/comment/'.$comment->id.'/delete')}}">
-  
-  <li style="font-size:1.1em;" class="fas fa-trash"></li></a>
-  <!-- <script type="text/javascript">
-	$(document).ready(function(){
-  		$("#del").submit(function(event){
-    		event.preventDefault(); //prevent default action
-    		var formData = $(this).serializeArray();
-    		$.post("{{url($userType.'/courses/'.$courseData->id.'/comment/'.$comment->id.'/delete')}}" , formData, function(response) {
-        		toast.success(response.msg);
-        		url.load();
-
-    		}).fail(function(error) {
-        		failError.toast(error.msg);
-    		});
-  		});
-	});
-	</script> -->
+  	<button class="btn-sm" onclick="deleteComment({{$comment->id}})"><i class="fas fa-trash"></i></button>
    @endif 
 </div>
    </div>
 
    </div>
    <div>
-    <p style='word-break: break-all; white-space: normal;'>{!! nl2br(e($comment->comment )) !!}</p>
+   	
+    <p style='word-break: break-all; white-space: normal;'>
+    	{!! nl2br($comment->comment) !!}
+    </p>
 </div>
 </div>
 <!-- comment/post display section end -->
@@ -327,12 +296,15 @@
 
 <!-- comment reply display section start-->
 @if($comment->replies->count() > 0)
-<button class='btn btn-link'>
-<li data-toggle="collapse" data-target=".multi-collapse" 
- aria-expanded="false" aria-controls="commentbox">{{$comment->replies->count()}} class comment
- </li> </button>
+
+<div class='btn btn-link'>
+<li data-toggle="collapse" data-target=".multi-collapse_{{$comment->id}}" 
+ aria-expanded="false" aria-controls="commentbox">
+ {{$comment->replies->count()}} class comment
+ </li> 
+</div>
 	@foreach ($comment->replies as $reply)
-	<div class="collapse multi-collapse" id="commentbox">
+<div class="collapse multi-collapse_{{$comment->id}}" id="commentbox">
   <a class="profle" href="#">  
   <img style="border-radius: 100%;border: 1px solid #eeeeee"  width="40" hieght="40"
 	  src="{{asset('upload/avatars/default_avatar.png')}}"></a>
@@ -345,21 +317,17 @@
    <div style="float:right;" class='reply-delete-update'>
 
    @if(Auth::user()->id == $reply->user->id) 
-   <a href="{{url($userType.'/courses/'.$courseData->id.'/comment-reply/'.$reply->id.'/update')}}">
-   
-  <li style="font-size:1.0em;"  class="fas fa-edit"></li></a>
+  <button class="btn-sm btn-success" onclick="loadUpdateCommentReply({{$reply->id}})"><i class="fas fa-edit"></i></button>
   @endif 
    <!-- update -->
    @if(Auth::user()->id == $reply->user->id || $courseData->isAdmin()) 
-   <a onclick="deleteReply({{$reply->id}})" href="{{url($userType.'/courses/'.$courseData->id.'/comment_reply/'.$reply->id.'/delete')}}">
-  
-   <li style="font-size:1.0em;"  class="fas fa-trash"></li></a>
+   <button class="btn-sm" onclick="deleteCommentReply({{$reply->id}})"><i class="fas fa-trash"></i></button>
    
    @endif 
    </div>
    
    <a  style='color: #151E3D;font-weight:900;' class="name" href="#"><b>{{$reply->user->full_name}}</b></a>
-   <h6  style='color:#555b57' class="date">{{ $reply->created_at->diffForHumans()}}</h6>
+   <h6  style='color:#555b57;margin-left: 2px' class="date">{{ $reply->created_at->diffForHumans()}}</h6>
    </div>
    </div>
    <div class="get-reply">
@@ -372,38 +340,23 @@
  @else
 @endif
 <!-- comment reply display section end -->
+
 <!-- comment reply send section start -->
 <div class="reply-section">
 <img style="border-radius: 100%;border: 1px solid #eeeeee"  width="40" hieght="40" src="{{asset('upload/avatars/default_avatar.png')}}" width="40">
- 
  <div class="row comment-box-main p-3 rounded-bottom">
 	<div class="col-md-9 col-sm-9 col-9 pr-0 comment-box">
-	<form id='reply_comment' method="post" action="{{url($userType.'/courses/'.$courseData->id.'/comment/'.$comment->id.'/comment-reply')}}" > 
+	<!-- <form id='reply_comment' method="post" action="{{url($userType.'/courses/'.$courseData->id.'/comment/'.$comment->id.'/comment-reply')}}" >  -->
 	<div  class="form-group">
 	 @csrf
-	 <textarea  id="url" name="comment_reply" cols='10' wrap="pysical"class="text-area-messge form-control"
+	 <textarea  id="comment_reply_{{$comment->id}}" name="comment_reply" cols='10' wrap="pysical"class="text-area-messge form-control"
     placeholder="comment..." aria-required="true" aria-invalid="false"></textarea >
    <!-- <input type="text" name='comment_reply' id='comment_reply' class="form-control" placeholder="comment ...." />-->
     </div>
 	<div style="float:right;" class=" text-center send-btn">
-	<button class="btn btn-info">Send</button>
+	<button class="btn btn-info" onclick="addCommentReply({{$comment->id}})">Send</button>
 	</div>
-	</form>
-	<script type="text/javascript">
-	$(document).ready(function(){
-  		$("#reply_comment").submit(function(event){
-    		event.preventDefault(); //prevent default action
-    		var formData = $(this).serializeArray();
-    		$.post("{{url($userType.'/courses/'.$courseData->id.'/comment/'.$comment->id.'/comment-reply')}}" , formData, function(response) {
-        		toast.success(response.msg);
-        		url.load();
-
-    		}).fail(function(error) {
-        		failError.toast(error.msg);
-    		});
-  		});
-	});
-	</script>
+	<!-- </form> -->
  </div>
 </div>
 </div>

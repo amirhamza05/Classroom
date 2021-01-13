@@ -12,7 +12,7 @@
   			z-index: 999;
   			box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
 		}
-	.course a{
+	.courseHeader a{
 		text-align: center;
 		padding: 15px 20px 15px 20px;
 		color: #7f8c8d;
@@ -175,7 +175,7 @@ button:focus {
         ],
     ];
 @endphp
-<div class="header">
+<div class="header courseHeader">
 		<div class="row">
 			<div class="pull-left">
 				<a href="{{url($userType.'/courses/'.$courseData['id'])}}" class="title">{{$courseData->name(30)}}</a>
@@ -183,13 +183,13 @@ button:focus {
 			<center>
 			@if(Auth::user()->user_type != 'Student')
 				@foreach($courseHeader as $key => $value)
-               	<a href="{{url($urlPrefix.$key)}}" class="{{ request()->is($urlPrefix.$key) ? 'active' : '' }}"><span class="{{$value['icon']}}"></span> {{$value['title']}}</a>
+               	<a  href="{{url($urlPrefix.$key)}}" class="{{ request()->is($urlPrefix.$key) ? 'active' : '' }}"><span class="{{$value['icon']}}"></span> {{$value['title']}}</a>
             	@endforeach
 
 			@else
 				@unset($courseHeader['/grade'])
 			    @foreach($courseHeader as $key => $value )
-               	<a href="{{url($urlPrefix.$key)}}" class="{{ request()->is($urlPrefix.$key) ? 'active' : '' }}"><span class="{{$value['icon']}}"></span> {{$value['title']}}</a>
+               	<a  href="{{url($urlPrefix.$key)}}" class="{{ request()->is($urlPrefix.$key) ? 'active' : '' }}"><span class="{{$value['icon']}}"></span> {{$value['title']}}</a>
 				@endforeach
 			@endif
 			</center>
