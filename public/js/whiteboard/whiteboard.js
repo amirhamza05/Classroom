@@ -32,14 +32,16 @@ var board = {
     updateCanvas: function() {
         if (this.editing) return;
         var data = {
-            'image': true
+            'image': true,
+            'board_hash': boardHash,
         };
         $.get(url.get(1) + "/get", data, function(response) {
             //if same then no update canvas
-            if (parseInt(response.last_update) <= board.lastUpdate) return;
-            if (response.real_time_hash == board.realTimeHash) return;
-            board.lastUpdate = parseInt(response.last_update);
-            board.realTimeHash = response.real_time_hash;
+            
+            if (parseInt(response.last_update) <= board.lastUpdateTime) return;
+            //if (response.last_update_hash == board.realTimeHash) return;
+            board.lastUpdateTime = parseInt(response.last_update);
+            //board.realTimeHash = response.last_update_hash;
             var image = new Image();
             image.src = response.image;
             image.onload = function() {
@@ -50,21 +52,26 @@ var board = {
         });
     },
     update: function() {
+       // return;
         if (this.editing) return;
-        $.get(url.get(1) + "/get", function(response) {
-            if (parseInt(response.last_update) <= board.lastUpdate) return;
+        var data = {
+            'board_hash': boardHash,
+        }
+        $.get(url.get(1) + "/get", data, function(response) {
+           if (parseInt(response.last_update) <= board.lastUpdateTime) return;
             board.updateCanvas();
         });
     },
     save: function() {
         var data = {
-            'board': this.canvas.toDataURL("image/png")
+            'board': this.canvas.toDataURL("image/png"),
+            'board_hash': boardHash
         };
+
         $.post(url.get(1) + "/save", app.setToken(data), function(response) {
             //console.log("saved");
-            //console.log(response);
             board.editing = false;
-            board.lastUpdate = parseInt(response.last_update);
+            board.lastUpdateTime = parseInt(response.last_update);
             board.realTimeHash = response.realTimeHash;
             //console.log(board.lastUpdate);
         });
@@ -113,6 +120,16 @@ setTimeout(function() {
 var loadFile = function(e) {
     board.loadFile(e);
 };
+
+function goCanvasPage(hashId){
+    window.location.href = url.get(1)+"?board="+hashId;
+}
+
+function addNewPage() {
+    $.get(url.get(1) + "/add_page", function(response) {
+        window.location.href = url.get(1)+"?board="+response.board_hash;
+    });
+}
 $("#controls").on("click", "li", function() {
     $(this).siblings().removeClass("selected");
     $(this).addClass("selected");
@@ -141,25 +158,24 @@ function makeCursor() {
     ctx.lineWidth = board.width;
     width = 14 + board.pencilLength;
     //ctx.moveTo(150, 150);
-   // ctx.arc(15, 15, 15, 0, 2 * Math.PI);
+    // ctx.arc(15, 15, 15, 0, 2 * Math.PI);
     //var img = document.getElementById("pencil");
-     //ctx.font=17 + 'px FontAwesome';
-     //ctx.rotate(30);
-
-     ctx.font='15px Arial';
-     //ctx.translate(150,150);
-    ctx.rotate(Math.PI/4);
+    //ctx.font=17 + 'px FontAwesome';
+    //ctx.rotate(30);
+    ctx.font = '15px Arial';
+    //ctx.translate(150,150);
+    ctx.rotate(Math.PI / 4);
     ctx.textAlign = 'right';
-    ctx.fillText('Hello World',30,20);
-
+    ctx.fillText('Hello World', 30, 20);
     //ctx.textAlign = 'right';
-   // ctx.fillText('Hamza',30 ,30);
+    // ctx.fillText('Hamza',30 ,30);
     //\uf1fc
-    
     ctx.stroke();
     // set image as cursor (modern browsers can take PNGs as cursor).
     return 'url(' + cursor.toDataURL() + '), auto';
 }
+
+
 // painting with mouse events
 $canvas.mousedown(function(e) {
     board.lastEvent = e;

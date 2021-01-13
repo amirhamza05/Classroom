@@ -84,10 +84,12 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
                 Route::get('/board/', 'Course\ScheduleController@getBoard');
                 Route::post('/board/save', 'Course\ScheduleController@saveBoard');
 
-                Route::get('/whiteboard', 'Course\ScheduleController@viewWhiteboard');
-                Route::get('/whiteboard/get', 'Course\ScheduleController@getBoard');
-                Route::post('/whiteboard/save', 'Course\ScheduleController@saveBoard');
-                Route::get('/whiteboard/download', 'Course\ScheduleController@downloadBoard');
+                
+                Route::get('/whiteboard', 'Course\ScheduleWhiteboardController@viewWhiteboard');
+                Route::get('/whiteboard/get', 'Course\ScheduleWhiteboardController@getBoard');
+                Route::post('/whiteboard/save', 'Course\ScheduleWhiteboardController@saveBoard');
+                Route::get('/whiteboard/add_page', 'Course\ScheduleWhiteboardController@addPage');
+                Route::get('/whiteboard/download', 'Course\ScheduleWhiteboardController@downloadBoard');
                 
                 Route::post('/send_conversation', 'Course\ScheduleController@sendConversation');
                 Route::get('/conversations', 'Course\ScheduleController@viewConversations');

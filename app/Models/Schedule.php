@@ -90,4 +90,7 @@ class Schedule extends Model
     {
         return $this->hasMany(ScheduleConversation::class);
     }
+    public function whiteboards(){
+        return $this->hasMany(ScheduleWhiteboard::class);
+    }
 }

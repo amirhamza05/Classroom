@@ -15,11 +15,18 @@
   <div class="page-number"></div>
 </div>
 <div class="front-page">
+	<font size="40px">Class Lecture Board</font>
 	<div class="name">{{$courseData->name}}</div>
+	<b>Class Title:</b> {{$scheduleData->name}}<br/>
+	<b>Class Start:</b> {{$scheduleData->start_time}}<br/>
+	<b>Class End:</b> {{$scheduleData->end_time}}<br/>
 </div>
-@for($i=1; $i<=4; $i++)
-<img id="scream" width="100%"  src="{{$scheduleData->getBoard()}}" alt="The Scream">
-@endfor
+	<?php 
+		$whiteboards = $scheduleData->whiteboards()->get();
+	?>
+		@foreach($whiteboards as $key => $whiteboard)
+		<img id="scream" width="100%"  src="{{$whiteboard->getBoard()}}" alt="The Scream">
+		@endforeach
 <style>
 	@page { margin: 5px; }
 #header,
