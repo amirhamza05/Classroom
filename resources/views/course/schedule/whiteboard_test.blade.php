@@ -31,6 +31,7 @@
 </style>
 <script type="text/javascript">
 	var boardHash = "{{$whiteboardData->board_hash}}";
+	var isTeacher = {{auth()->user()->isTeacher()}};
 
 </script>
 
@@ -44,10 +45,10 @@
 		</div>
 		@endforeach
 
-
 		</div>
 		<img  id='pencil' src="/img/icon/pencil.png" style="display: none">
 		<canvas id="myCanvas" style="margin-left: 220px;" width="1080px" height="580px"></canvas>
+		@if(auth()->user()->isTeacher())
 		<div class="footerToolArea">
 			<div style="float: left;margin-top: 30px;margin-left: 15px;">
 				<center><button onclick="addNewPage()" class="addBtn" style="width: 190px;">Add New Page</button></center>
@@ -85,6 +86,7 @@
 					</ul>
 			</div>
 		</div>
+		@endif
 <img style="display: none;" id="scream" src="{{$whiteboardData->getBoard()}}" alt="The Scream">
 
 <script type="text/javascript" src="{{asset('js/whiteboard/whiteboard.js')}}"></script>

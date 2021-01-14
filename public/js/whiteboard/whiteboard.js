@@ -178,21 +178,28 @@ function makeCursor() {
 
 // painting with mouse events
 $canvas.mousedown(function(e) {
-    board.lastEvent = e;
-    board.mouseDown = true;
-    board.editing = true;
-    board.totalLineDown++;
-    console.log("Mouse Down " + board.totalLineDown);
+    if(isTeacher){
+        board.lastEvent = e;
+        board.mouseDown = true;
+        board.editing = true;
+        board.totalLineDown++;
+    }
 }).mousemove(function(e) {
-    $canvas.css('cursor', "url(/img/icon/pencil.png),auto");
+    if(isTeacher){
+        $canvas.css('cursor', "url(/img/icon/pencil.png),auto");
+    }
     if (board.mouseDown) {
         if (board.tool == "eraser") board.eraser(e);
         else if (board.tool == "pencil") board.drawPencil(e);
     }
 }).mouseup(function() {
-    board.mouseDown = false;
-    board.save();
+   if(isTeacher){
+        board.mouseDown = false;
+        board.save();
+    }
 }).mouseleave(function() {
-    board.mouseDown = false;
+    if(isTeacher){
+        board.mouseDown = false;
+    }
 });
 //temp start

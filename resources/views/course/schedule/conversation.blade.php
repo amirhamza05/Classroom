@@ -102,7 +102,7 @@
                 <span class="direct-chat-timestamp pull-right" title="">{{ $conversation->created_at}}</span>
             </div>
               <!-- /.direct-chat-info -->
-             <img class="direct-chat-img" src="http://127.0.0.1:8000/upload/avatars/default_avatar.png" alt="Message User Image"><!-- /.direct-chat-img -->
+             <img class="direct-chat-img" src="/upload/avatars/default_avatar.png" alt="Message User Image"><!-- /.direct-chat-img -->
              <div class="direct-chat-text">
                 {{$conversation->message}}
              </div>

@@ -7,6 +7,7 @@ use App\Http\Requests\Course\CourseCreate;
 use App\Http\Requests\Course\TeacherAdd;
 use App\Http\Requests\Course\CourseJoin;
 use App\Http\Requests\Course\StudentAdd;
+use App\Http\Controllers\Layout\LayoutController as Layout;
 
 //custom controllers
 use App\Models\Course;
@@ -24,6 +25,20 @@ class CourseController extends Controller
             'error'     => 0,
             'course_id' => $courseData->id,
             'msg' => "Successfully added new course"
+        ]);
+    }
+    public function courseUpdate(CourseCreate $request){
+        Course::find(request()->course_id)->update(request()->all());
+        return response()->json([
+            'error'     => 0,
+            'msg' => "Successfully Update course"
+        ]);
+    }
+
+    public function routine(){
+        $courseList = auth()->user()->courses()->where(['status' => 'accept','is_archive' => '0'])->get();
+        return Layout::view("course.page.routine", [
+            'courseList' => $courseList,
         ]);
     }
 

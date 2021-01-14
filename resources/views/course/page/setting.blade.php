@@ -28,7 +28,7 @@
 	<div class="courseBody">
 		@if($courseData->isAdmin())
 		<div class="box">
-			<form action="" id="create_course" method="post">
+			<form action="{{url()->current().'/update'}}" id="update_course" method="post">
 	@csrf
 <div class="course-list">
 <div class="row">
@@ -39,19 +39,19 @@
 		Section:
 	</div>
 	<div class="col-md-10">
-		<input type="text" class="input"  name="section" placeholder="Section" autocomplete="off">
+		<input type="text" class="input" value="{{$courseData->section}}"  name="section" placeholder="Section" autocomplete="off">
 	</div>
 	<div class="col-md-2 inputLabel">
 		Subject:
 	</div>
 	<div class="col-md-10">
-		<input type="text" class="input" name="subject" placeholder="Subject" autocomplete="off">
+		<input type="text" class="input" value="{{$courseData->subject}}" name="subject" placeholder="Subject" autocomplete="off">
 	</div>
 	<div class="col-md-2 inputLabel">
 		Room:
 	</div>
 	<div class="col-md-10">
-		<input type="text" class="input" name="room" placeholder="Room" autocomplete="off">
+		<input type="text" value="{{$courseData->room}}" class="input" name="room" placeholder="Room" autocomplete="off">
 	</div>
 	<div class="col-md-4"></div>
 	<div class="col-md-8">
@@ -60,12 +60,30 @@
 	<div class="pull-right">
 		<button type="submit" class="btn-success" style="margin-top: 20px;"><i class="fas fa-edit"></i> Update Course Data</button>
 	</div>
-
 </div>
 
 </div>
 
 </form>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+  		$("#update_course").submit(function(event){
+    		event.preventDefault(); //prevent default action
+    		var formData = $(this).serializeArray();
+    		$.post(url.get(1)+"/update", formData, function(response) {
+        		if (response.error == 0) {
+        			toast.success(response.msg);
+        		}
+        		else {
+            		$("#loginResponse").html(response.errorMsg);
+        		}
+    		});
+  		});
+	});
+</script>
+
+
 		</div>
 @endif
 		<div class="box" style="border: 1px solid red">

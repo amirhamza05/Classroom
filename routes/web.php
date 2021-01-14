@@ -36,6 +36,7 @@ Route::group(['middleware' => ['guest']], function () {
 
   Route::group(['prefix' => 'teacher', 'middleware' => ['teacher']], function () {
     Route::get('/dashboard', 'Home\home@teacherDashboard');
+    Route::get('/routine', 'Course\CourseController@routine');
     Route::get('/logout', 'Auth\LoginController@logout');
 
     //profile
@@ -59,6 +60,7 @@ Route::group(['middleware' => ['guest']], function () {
         Route::get('/students', 'Course\CoursePageController@viewStudentList');
         Route::get('/setting', 'Course\CoursePageController@setting');
         Route::get('/setting/leave', 'Course\CourseController@leave');
+        Route::post('/setting/update', 'Course\CourseController@courseUpdate');
 
         //post comment
         Route::post('/comment', 'Course\CommentController@create');
@@ -127,8 +129,6 @@ Route::group(['middleware' => ['guest']], function () {
 
     //end classroom --------------------
 
-    Route::get('/routine', 'User\LoginUserController@getProfile');
-
     Route::get('/update_profile', function () {
         return view('user.update_profile');
     });
@@ -149,6 +149,7 @@ Route::get('/test', "Home\home@test");
 
 Route::group(['prefix' => 'student', 'middleware' => ['student']], function () {
     Route::get('/dashboard', 'Home\home@studentDashboard');
+    Route::get('/routine', 'Course\CourseController@routine');
 
     Route::get('/logout', 'Auth\LoginController@logout');
 
@@ -188,15 +189,38 @@ Route::group(['prefix' => 'student', 'middleware' => ['student']], function () {
         Route::post('/comment-reply/{comment_reply_id}/update', 'Course\CommentReplyController@update');
         Route::get('/comment_reply/{comment_reply_id}/delete', 'Course\CommentReplyController@deletePage');
 
+        //schedule
+
+        Route::group(['prefix' => 'schedule/'], function () {
+            Route::get('/', 'Course\ScheduleController@scheduleList');
+            
+            Route::group(['prefix' => '{schedule_id}/'], function () {
+               
+                Route::get('/board/', 'Course\ScheduleController@getBoard');
+                
+                Route::get('/whiteboard', 'Course\ScheduleWhiteboardController@viewWhiteboard');
+                Route::get('/whiteboard/get', 'Course\ScheduleWhiteboardController@getBoard');
+                
+                Route::get('/whiteboard/download', 'Course\ScheduleWhiteboardController@downloadBoard');
+                
+                Route::post('/send_conversation', 'Course\ScheduleController@sendConversation');
+                Route::get('/conversations', 'Course\ScheduleController@viewConversations');
+
+                Route::get('/', 'Course\ScheduleController@viewSchedule');
+                Route::get('/', 'Course\ScheduleController@viewSchedule');
+
+                Route::get('/present_graph', function () {
+                    return view('course.schedule.class_present_graph');
+                });
+            });
+        });
+
     });
 
     //post
     Route::post('/courses/join', 'Course\CourseController@join');
 
     //end classroom --------------------
-
-    Route::get('/routine', 'User\LoginUserController@getProfile');
-
     Route::get('/update_profile', function () {
         return view('user.update_profile');
     });
