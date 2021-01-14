@@ -53,8 +53,18 @@
 	</div>
 	<div class="col-md-4">
 		<div class="box" style="height: 190px;box-shadow: 0px 0px 15px 1px #aaaaaa;">
-			<button>Go To This Class</button>
-			<button onclick="url.load()">Load</button>
+			@if($scheduleData->isEnd())
+				<h1>Class Is End</h1>
+			@endif
+			@if($scheduleData->isNotStart())
+				<h1>Class Is Not Start</h1>
+			@endif
+			@if($scheduleData->isRunning())
+				<h1>Class Is Running</h1>
+				@if($scheduleData->metting_link != "")
+					<a href="{{$scheduleData->metting_link}}"><button>Go To This Class</button></a>
+				@endif
+			@endif
 		</div>
 		<div class="box" style="padding: 0px;height: 370px;box-shadow: 0px 0px 15px 1px #aaaaaa;">
 		 	<div class="box-header">Class Conversation</div>

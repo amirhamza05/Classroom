@@ -232,6 +232,7 @@
 
 <script>
 	
+
     ClassicEditor
         .create( document.querySelector( '#editor' ) )
         .then( editor => {
@@ -286,9 +287,9 @@
    </div>
    <div>
    	
-    <p style='word-break: break-all; white-space: normal;'>
+    <div class="ck-content" style='word-break: break-all; white-space: normal;'>
     	{!! nl2br($comment->comment) !!}
-    </p>
+    </div>
 </div>
 </div>
 <!-- comment/post display section end -->

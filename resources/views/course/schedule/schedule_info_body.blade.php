@@ -64,24 +64,6 @@ width: 100%;
 }
 </style>
 <div class="tabs">
-  <div class="tab-button-outer">
-    <ul id="tab-button">
-      <li><a class="active">Basic Info</a></li>
-      <li><a href="#tab02">Tab 2</a></li>
-      <li><a href="#tab03">Tab 3</a></li>
-      <li><a href="#tab04">Tab 4</a></li>
-      <li><a href="#tab05">Tab 5</a></li>
-    </ul>
-  </div>
-  <div class="tab-select-outer">
-    <select id="tab-select">
-      <option value="#tab01">Tab 1</option>
-      <option value="#tab02">Tab 2</option>
-      <option value="#tab03">Tab 3</option>
-      <option value="#tab04">Tab 4</option>
-      <option value="#tab05">Tab 5</option>
-    </select>
-  </div>
 
 <div class="iframe-container" style="">
      

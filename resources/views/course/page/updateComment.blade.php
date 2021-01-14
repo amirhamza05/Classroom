@@ -21,7 +21,7 @@
         .create( document.querySelector( '#commentEditEditor' ) )
         .then( editor => {
            commentEditor[{{$commentData->id}}] = editor; // Save for later use.
-           editor.setData("<?php echo $commentData->comment; ?>");
+           editor.setData('<?php echo $commentData->comment; ?>');
       } )
         .catch( error => {
             console.error( error );

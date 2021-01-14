@@ -13,7 +13,8 @@
         //<!-- Custom Script -->
         asset('css/sidebar.css'),
         asset('css/home.css'),
-        asset('css/modal.css')
+        asset('css/modal.css'),
+        asset('css/ckeditor.css'),
     ];
 @endphp
 
