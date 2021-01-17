@@ -1,61 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# EduHome Online Classroom System
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Introduction & Motivations:
 
-## About Laravel
+The online classroom is a very popular platform for the education system. Many countries are now enforcing the online classroom  system so that the teachers and students can communicate with each other. For example a very common and known to all ‘Google Classroom’. This online classroom system provides many facilities like shared materials, assignments, grade students, create unlimited courses, add students in there, etc.  This is a great opportunity for every educational institute to enlarge and ease their education system. After the covid-19 breakdown, most of the educational institutes all around the world went into the online classroom system. They are using many online classroom platforms like ‘TalentLMS’,’ Google Classroom’, ‘visme’, etc. So, we have got the motivation to make this online classroom system for teachers and students. 
+Our Eduhome online classroom system has some similar features like ‘google classroom’ but we have added some different features to it. Also, our classroom had some extra features that can help the teachers to teach their students more efficiently. Our Eduhome online classroom provides some facilities that can be highly mentioned. We have made a whiteboard feature where a teacher can easily draw so that she/he can teach the students more understandably. Also, our system provides an opportunity to see how many students are online in a specific class whenever a teacher creates a class according to the schedule. Also, in the scheduled class, the teacher and students can get a feature where they could start conversations. So, our EduHome online system has some significant facilities that a teacher or a student can utilize for their educational purpose.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features of EduHome Online Classroom System
+- User Authentication (login,registration)
+- User Dashboard
+- Profile Update 
+- List of Courses  
+- Stream of a course
+- Teacher List of a course 
+- Student List of a course
+- Course Setting
+- Schedule of a course
+- Create Whiteboard 
+- Start Class Conversation
+- Attend to Online Meet
+- Course Routine 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Language
+----------------------------------------------------
+- Frontend: HTML, CSS, JavaScript, Jquery, Bootstrap.
+- Backend: Laravel
+- Database: MySQL.
+- Server: Apache
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Screen Shot
+-----------------------
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/login.png">
+<p align="center"><b>Login</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/register.png">
+<p align="center"><b>Registration</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/register_success.png">
+<p align="center"><b>Registration Success</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/dashboard.png">
+<p align="center"><b>Dashboard</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/profile_setting.png">
+<p align="center"><b>Profile Update</b></p>
 
-## Learning Laravel
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/course_list.png">
+<p align="center"><b>Course Feature</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/stream.png">
+<p align="center"><b>Course Stream</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/strem1.png">
+<p align="center"><b>Post/Comment Stream </b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/strem2_update.png">
+<p align="center"><b>Update Post/Comment</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/Student_list.png">
+<p align="center"><b>Student List</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/teacher_list.png">
+<p align="center"><b>Teacher List</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/add_teacher.png">
+<p align="center"><b>Add Multiple Teacher</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/course_setting.png">
+<p align="center"><b>Course Setting</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/schedule_listt.png">
+<p align="center"><b>Schedule List</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/create_schedule.png">
+<p align="center"><b>Create Schedule</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/schedule_interface.png">
+<p align="center"><b>Course Schedule Interface</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/whiteboard.png">
+<p align="center"><b>Whiteboard in a scheduled course</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/whiteboard_pdf.png">
+<p align="center"><b>Whiteboard writing PDF download Preview</b></p>
+<img src="https://github.com/TanzinaTani/Classroom/blob/master/Interface%20Picture/screenshot%20interface/routine.png">
+<p align="center"><b>Course Routine</b></p>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
